@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  date: 2017-05-18
+  distrilog: 
+  installLink: MyString
+  website: MyString
+  presentation: MyString
+
+two:
+  name: MyString
+  date: 2017-05-18
+  distrilog: 
+  installLink: MyString
+  website: MyString
+  presentation: MyString
