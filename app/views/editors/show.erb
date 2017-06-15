@@ -1,0 +1,12 @@
+<p>
+  <strong>Name:</strong>
+  <%= @editor.name %>
+</p>
+
+<p>
+  <strong>Website:</strong>
+  <%= @editor.website %>
+</p>
+
+<%= link_to 'Back', editors_path %>
+<%= link_to 'Edit', edit_editor_path(@editor) %>

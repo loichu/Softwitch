@@ -1,0 +1,20 @@
+<h1>Listing softwares</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Editor</th>
+  </tr>
+
+  <% @softwares.each do |software| %>
+      <tr>
+        <td><%= software.name %></td>
+        <td><%= software.editor.name %></td>
+        <td><%= link_to 'Show', software_path(software) %></td>
+        <td><%= link_to 'Edit', edit_software_path(software) %></td>
+        <td><%= link_to 'Destroy', software_path(software),
+                        method: :delete,
+                        data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+  <% end %>
+</table>

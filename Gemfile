@@ -12,12 +12,16 @@ gem "rails-erd"
 # Bootstrap
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
+# DB migrate
+gem 'taps'
 #---------------
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.1'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
+# Use Postgresql as the database for Active Record
+gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets

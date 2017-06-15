@@ -1,0 +1,20 @@
+<h1>Listing versions</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Website</th>
+  </tr>
+
+  <% @versions.each do |version| %>
+      <tr>
+        <td><%= version.name %></td>
+        <td><%= version.website %></td>
+        <td><%= link_to 'Show', version_path(version) %></td>
+        <td><%= link_to 'Edit', edit_version_path(version) %></td>
+        <td><%= link_to 'Destroy', version_path(version),
+                        method: :delete,
+                        data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+  <% end %>
+</table>

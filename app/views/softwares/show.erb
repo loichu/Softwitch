@@ -1,0 +1,12 @@
+<p>
+  <strong>Name:</strong>
+  <%= @software.name %>
+</p>
+
+<p>
+  <strong>Editor:</strong>
+  <%= @editor.name %>
+</p>
+
+<%= link_to 'Back', softwares_path %>
+<%= link_to 'Edit', edit_software_path(@software) %>
