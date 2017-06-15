@@ -1,29 +1,31 @@
-<p>
-  <%= v.label :name %><br>
-  <%= v.text_field :name %>
-</p>
+<%= fields_for @version do |v| %>
+    <p>
+      <%= v.label "Version's name" %><br>
+      <%= v.text_field :name %>
+    </p>
 
-<p>
-  <%= v.label :website %><br>
-  <%= v.text_field :website%>
-</p>
+    <p>
+      <%= v.label :website %><br>
+      <%= v.text_field :website%>
+    </p>
 
-<p>
-  <%= v.label "Release date" %><br>
-  <%= v.text_field :date %>
-</p>
+    <p>
+      <%= v.label "Release date" %><br>
+      <%= v.text_field :date %>
+    </p>
 
-<p>
-  <%= v.label :distrilog %><br>
-  <%= v.check_box :distrilog %>
-</p>
+    <p>
+      <%= v.label :distrilog %><br>
+      <%= v.check_box :distrilog %>
+    </p>
 
-<p>
-  <%= v.label "Download link" %><br>
-  <%= v.text_field :installLink %>
-</p>
+    <p>
+      <%= v.label "Download link" %><br>
+      <%= v.text_field :installLink %>
+    </p>
 
-<p>
-  <%= v.label :presentation %><br>
-  <%= v.text_area :presentation %>
-</p>
+    <p>
+      <%= v.label :presentation %><br>
+      <%= v.text_area :presentation %>
+    </p>
+<% end %>

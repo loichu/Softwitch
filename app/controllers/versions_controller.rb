@@ -8,6 +8,7 @@
 
 class VersionsController < ApplicationController
   def index
+    check_software
     @versions = Version.all
   end
 
@@ -16,6 +17,7 @@ class VersionsController < ApplicationController
   end
 
   def new
+    check_software
     @version = Version.new
   end
 
@@ -43,5 +45,11 @@ class VersionsController < ApplicationController
   private
   def version_params
     params.require(:version).permit(:name, :website)
+  end
+
+  def check_software
+    if params[:software_id] == nil
+      redirect_to softwares_url, :flash => { :error => "A version must correspond to a software"}
+    end
   end
 end

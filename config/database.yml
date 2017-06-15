@@ -1,40 +1,33 @@
-# SQLite version 3.x
-#   gem install sqlite3
+# PostgreSQL 9.6
+#   gem install pg
 #
-#   Ensure the SQLite 3 gem is defined in your Gemfile
-#   gem 'sqlite3'
+#   Ensure the PostgreSQL gem is defined in your Gemfile
+#   gem 'pg'
 #
-#default: &default
-#  adapter: sqlite3
-#  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-#  timeout: 5000
+default: &default
+  host: localhost
+  port: 5432
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: softwitch
+  password: password
 
-#development:
-#  <<: *default
-#  database: db/development.sqlite3
+development:
+  <<: *default
+  database: softwitch_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
-#test:
-#  <<: *default
-#  database: db/test.sqlite3
+test:
+  <<: *default
+  database: softwitch_test
 
+# No production DB for now
 #production:
 #  <<: *default
-#  database: db/production.sqlite3
-development:
-  adapter: postgresql
-  encoding: unicode
-  database: softwitch_development
-  pool: 5
-  username: softwitch
-  password: password
+#  database: softwitch_production
 
-test:
-  adapter: postgresql
-  encoding: unicode
-  database: softwitch_test
-  pool: 5
-  username: softwitch
-  password: password
+
+

@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20170518092432) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "editors", force: :cascade do |t|
     t.string "name"
     t.string "website"
@@ -26,26 +29,26 @@ ActiveRecord::Schema.define(version: 20170518092432) do
   end
 
   create_table "operating_systems_rooms", id: false, force: :cascade do |t|
-    t.integer "room_id", null: false
-    t.integer "operating_system_id", null: false
+    t.bigint "room_id", null: false
+    t.bigint "operating_system_id", null: false
   end
 
   create_table "operating_systems_versions", id: false, force: :cascade do |t|
-    t.integer "version_id", null: false
-    t.integer "operating_system_id", null: false
+    t.bigint "version_id", null: false
+    t.bigint "operating_system_id", null: false
   end
 
   create_table "pcs", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "room_id"
+    t.bigint "room_id"
     t.index ["room_id"], name: "index_pcs_on_room_id"
   end
 
   create_table "pcs_versions", id: false, force: :cascade do |t|
-    t.integer "version_id", null: false
-    t.integer "pc_id", null: false
+    t.bigint "version_id", null: false
+    t.bigint "pc_id", null: false
   end
 
   create_table "people", force: :cascade do |t|
@@ -67,7 +70,7 @@ ActiveRecord::Schema.define(version: 20170518092432) do
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "editor_id"
+    t.bigint "editor_id"
     t.index ["editor_id"], name: "index_softwares_on_editor_id"
   end
 
@@ -79,8 +82,8 @@ ActiveRecord::Schema.define(version: 20170518092432) do
   end
 
   create_table "tags_versions", id: false, force: :cascade do |t|
-    t.integer "version_id", null: false
-    t.integer "tag_id", null: false
+    t.bigint "version_id", null: false
+    t.bigint "tag_id", null: false
   end
 
   create_table "versions", force: :cascade do |t|
@@ -92,8 +95,11 @@ ActiveRecord::Schema.define(version: 20170518092432) do
     t.string "presentation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "software_id"
+    t.bigint "software_id"
     t.index ["software_id"], name: "index_versions_on_software_id"
   end
 
+  add_foreign_key "pcs", "rooms"
+  add_foreign_key "softwares", "editors"
+  add_foreign_key "versions", "softwares"
 end

@@ -14,7 +14,7 @@
     <% end %>
 
     <p>
-      <%= f.label :name %><br>
+      <%= f.label "Software's name" %><br>
       <%= f.text_field :name %>
     </p>
 
@@ -25,9 +25,7 @@
     </p>
 
     <% if @software.new_record? %>
-        <%= fields_for @version do |v| %>
-            <%= render 'versions/form' %>
-        <% end %>
+        <%= render 'versions/form' %>
     <% end %>
 
     <p>
