@@ -1,0 +1,95 @@
+//https://bootsnipp.com/snippets/featured/mobile-friendly-api-documentation
+
+/* lists */
+.list
+  .header, .cell
+    padding: 6px 6px 6px 10px
+
+  .list-header .header
+    font-weight: normal
+    text-transform: uppercase
+    font-size: 1.2em
+    color: #999
+    background-color: #eee
+
+  .row
+    border-bottom: 1px solid #ddd
+
+  .row:hover
+    background-color: #f7f7f7
+
+  .cell
+    font-size: 0.85em
+
+  .cell
+    font-size: 1em
+
+    .mobile-isrequired
+      display: none
+      font-weight: normal
+      text-transform: uppercase
+      color: #aaa
+      font-size: 0.8em
+
+    .software
+      white-space: nowrap
+      overflow: hidden
+      text-overflow: ellipsis
+      font-weight: bold
+
+    .editor
+      white-space: nowrap
+      overflow: hidden
+      text-overflow: ellipsis
+
+    a, a:hover
+      text-decoration: none
+
+@media (max-width: 991px)
+  .list
+    .row
+      padding-top: 10px
+      padding-bottom: 10px
+
+    .cell
+      padding: 0 10px
+
+      .software
+        font-weight: bold
+        font-size: 1.2em
+
+        .lookuplink
+          font-weight: normal
+          font-size: 1.5em
+          position: absolute
+          top: 0
+          right: 10px
+
+      .editor
+        padding-left: 10px
+        font-size: 1.1em
+
+      .os
+        padding-left: 10px
+        display: none
+
+      .description
+        padding-left: 10px
+
+      .mobile-isrequired
+        display: inline
+
+
+/* Row Utilities */
+.row
+  margin-left: 0
+  margin-right: 0
+
+  .margin-0
+    margin-left: -0px
+    margin-right: -0px
+
+  > [class^='col-']
+    padding-right: 0px
+    padding-left: 0px
+

@@ -1,31 +1,43 @@
-<%= fields_for @version do |v| %>
-    <p>
-      <%= v.label "Version's name" %><br>
-      <%= v.text_field :name %>
-    </p>
+<%= form_for @version do |v| %>
+    <div class="form-group">
+      <%= v.label :name, "Version's name", class: "col-md-4 control-label" %><br>
+      <div class="col-md-8">
+        <%= v.text_field :name, class: "form-control" %>
+      </div>
+    </div>
 
-    <p>
-      <%= v.label :website %><br>
-      <%= v.text_field :website%>
-    </p>
+    <div class="form-group">
+      <%= v.label :website, class: "col-md-4 control-label" %><br>
+      <div class="col-md-8">
+        <%= v.text_field :website, class: "form-control" %>
+      </div>
+    </div>
 
-    <p>
-      <%= v.label "Release date" %><br>
-      <%= v.text_field :date %>
-    </p>
+    <div class="form-group">
+      <%= v.label "Release date", class: "col-md-4 control-label" %><br>
+      <div class="col-md-8">
+        <%= v.text_field :date, class: "form-control" %>
+      </div>
+    </div>
 
-    <p>
-      <%= v.label :distrilog %><br>
-      <%= v.check_box :distrilog %>
-    </p>
+    <div class="form-group">
+      <%= v.label :distrilog, class: "col-md-4 control-label" %><br>
+      <div class="col-md-8">
+        <%= v.check_box :distrilog, class: "form-control" %>
+      </div>
+    </div>
 
-    <p>
-      <%= v.label "Download link" %><br>
-      <%= v.text_field :installLink %>
-    </p>
+    <div class="form-group">
+      <%= v.label "Download link", class: "col-md-4 control-label" %><br>
+      <div class="col-md-8">
+        <%= v.text_field :install_link, class: "form-control" %>
+      </div>
+    </div>
 
-    <p>
-      <%= v.label :presentation %><br>
-      <%= v.text_area :presentation %>
-    </p>
+    <div class="form-group">
+      <%= v.label :presentation, class: "col-md-4 control-label" %><br>
+      <div class="col-md-8">
+        <%= v.text_area :presentation, class: "form-control" %>
+      </div>
+    </div>
 <% end %>

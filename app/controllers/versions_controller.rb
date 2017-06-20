@@ -18,11 +18,14 @@ class VersionsController < ApplicationController
 
   def new
     check_software
+    @software = params[:software_id]
     @version = Version.new
+    #@version.software = Software.find(params[:software_id])
   end
 
   def create
-    @version = Version.new(version_params)
+    @version = Version.new
+
 
     if @version.save
       redirect_to @version

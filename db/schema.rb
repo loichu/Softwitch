@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170518092432) do
+ActiveRecord::Schema.define(version: 20170619154206) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20170518092432) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "editor_id"
+    t.string "short_desc"
     t.index ["editor_id"], name: "index_softwares_on_editor_id"
   end
 
@@ -90,9 +91,9 @@ ActiveRecord::Schema.define(version: 20170518092432) do
     t.string "name"
     t.date "date"
     t.boolean "distrilog"
-    t.string "installLink"
+    t.string "install_link"
     t.string "website"
-    t.string "presentation"
+    t.text "presentation"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "software_id"

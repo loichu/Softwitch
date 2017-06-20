@@ -12,6 +12,8 @@ gem "rails-erd"
 # Bootstrap
 gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
+# Jquery
+gem 'jquery-rails'
 #---------------
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

@@ -10,8 +10,7 @@ class SoftwaresController < ApplicationController
 
   def new
     @software = Software.new
-    @version = Version.new
-    #@version.build_software
+    @software.versions.build
     @editors = Editor.all
   end
 
@@ -32,7 +31,7 @@ class SoftwaresController < ApplicationController
       end
 
     else
-      render 'new'
+      redirect_to new_software_url
     end
   end
 
@@ -48,7 +47,7 @@ class SoftwaresController < ApplicationController
 
   private
     def version_params
-      params.require(:version).permit(:name, :website)
+      params.require(:version).permit(:name, :website, :distrilog, :date, :install_link, :presentation)
     end
 
     def software_params

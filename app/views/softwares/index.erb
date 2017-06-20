@@ -1,13 +1,8 @@
-<h1>Listing softwares</h1>
-
-<p id="error"><%= flash[:error] %></p>
-
 <table>
   <tr>
     <th>Name</th>
     <th>Editor</th>
   </tr>
-
   <% @softwares.each do |software| %>
       <tr>
         <td><%= software.name %></td>
@@ -20,3 +15,235 @@
       </tr>
   <% end %>
 </table>
+
+<div class="container-fluid text-center">
+  <div class="row content">
+    <div class="col-sm-8 text-left">
+
+      <h1>Listing softwares</h1>
+      <p id="error"><%= flash[:error] %></p>
+
+    </div>
+  </div>
+</div>
+
+<div class="container-fluid">
+  <div class="list">
+
+    <div class="row margin-0 list-header hidden-sm hidden-xs" style="padding: inherit">
+      <div class="col-md-3"><div class="header">Software</div></div>
+      <div class="col-md-2"><div class="header">Editor</div></div>
+      <div class="col-md-2"><div class="header">OS</div></div>
+      <div class="col-md-5"><div class="header">Description</div></div>
+    </div>
+
+    <% @softwares.each do |software| %>
+        <div class="row margin-0">
+
+          <div class="col-md-3">
+            <div class="cell">
+              <div class="software">
+                <%= software.name %>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-2">
+            <div class="cell">
+              <div class="editor">
+                <%= software.editor.name %>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-2">
+            <div class="cell">
+              <div class="os">
+                TODO: os icons highlighted if available
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-5">
+            <div class="cell">
+              <div class="description">
+                TODO: fill softwares/short_desc:text
+              </div>
+            </div>
+          </div>
+        </div>
+    <% end %>
+
+
+
+
+
+
+
+    <div class="row margin-0">
+
+      <div class="col-md-3">
+        <div class="cell">
+          <div class="softwarename">
+            CurrencyCode  <span class="mobile-isrequired">[Required]</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-2">
+        <div class="cell">
+          <div class="type">
+            <code>String</code>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-2">
+        <div class="cell">
+          <div class="isrequired">
+            Yes
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-5">
+        <div class="cell">
+          <div class="description">
+            The standard ISO 4217 3-letter currency code
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="row margin-0">
+      <div class="col-md-3">
+        <div class="cell">
+          <div class="softwarename">
+            PriceType  <span class="mobile-isrequired">[Required]</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-2">
+        <div class="cell">
+          <div class="type">
+            <code>Int32</code>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-2">
+        <div class="cell">
+          <div class="isrequired">
+            Yes
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-5">
+        <div class="cell">
+          <div class="description">
+            The type of price
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row margin-0">
+
+      <div class="col-md-3">
+        <div class="cell">
+          <div class="softwarename">
+            WarehouseID  <span class="mobile-isrequired">[Required]</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="cell">
+          <div class="type">
+            <code>Int32</code>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="cell">
+          <div class="isrequired">
+            Yes
+          </div>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div class="cell">
+          <div class="description">
+            The unique identifier for the warehouse
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row margin-0">
+      <div class="col-md-3">
+        <div class="cell">
+          <div class="softwarename">
+            ItemCodes
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="cell">
+          <div class="type">
+            <code>String[]</code>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="cell">
+          <div class="isrequired">
+            <span class="text-muted">No</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div class="cell">
+          <div class="description">
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row margin-0">
+      <div class="col-md-3">
+        <div class="cell">
+          <div class="softwarename">
+            LanguageID
+            <a class="lookuplink" href="javascript:;">
+              <i class="glyphicon glyphicon-search"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="cell">
+          <div class="type">
+            <code>Int32?</code>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-2">
+        <div class="cell">
+          <div class="isrequired">
+            <span class="text-muted">No</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-5">
+        <div class="cell">
+          <div class="description">
+            The customer's preferred language ID (ex. 0 (English), 1 (Spanish), etc.)
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
