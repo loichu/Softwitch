@@ -24,6 +24,11 @@
       <%= s.select :editor_id, options_for_select(@editors.all.map{|e|[e.name, e.id]}), {}, class: "form-control" %>
     </fieldset>
 
+    <fieldset class="form-group">
+      <%= s.label :short_desc, "Short description", class: "control-label" %><br>
+      <%= s.text_field :short_desc, class: "form-control" %>
+    </fieldset>
+
     <% if @software.new_record? %>
         <%= fields_for :version, Version.new do |v| %>
             <h3>Version's details</h3>
