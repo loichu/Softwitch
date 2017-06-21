@@ -12,6 +12,7 @@ class SoftwaresController < ApplicationController
     @software = Software.new
     @software.versions.build
     @editors = Editor.all
+    @os = OperatingSystem.all
   end
 
   def edit
@@ -27,6 +28,7 @@ class SoftwaresController < ApplicationController
       @version = @software.versions.create(version_params)
 
       if @version.save
+
         redirect_to @software
       end
 
@@ -47,7 +49,7 @@ class SoftwaresController < ApplicationController
 
   private
     def version_params
-      params.require(:version).permit(:name, :website, :distrilog, :date, :install_link, :presentation)
+      params.require(:version).permit(:name, :website, :distrilog, :date, :install_link, { operating_system_ids:[] })
     end
 
     def software_params

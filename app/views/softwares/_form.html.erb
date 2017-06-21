@@ -34,6 +34,11 @@
             <h3>Version's details</h3>
             <hr>
 
+            <fieldset class="form-group">
+              <%= v.label :os, "Compatibility", class: "control-label" %><br>
+              <%= v.collection_check_boxes :operating_system_ids, @os, :id, :name %>
+            </fieldset>
+
             <fieldset class="checkbox">
               <label style="padding-left: inherit">
                 <%= v.check_box :distrilog %>
@@ -61,11 +66,6 @@
             <fieldset class="form-group">
               <%= v.label :install_link, "Download link", class: "control-label" %><br>
               <%= v.text_field :install_link, class: "form-control" %>
-            </fieldset>
-
-            <fieldset class="form-group">
-              <%= v.label :presentation, class: "control-label" %><br>
-              <%= v.text_area :presentation, class: "form-control" %>
             </fieldset>
         <% end %>
     <% end %>
