@@ -1,6 +1,9 @@
 class SoftwaresController < ApplicationController
+  include SoftwaresHelper
+
   def index
     @softwares = Software.all
+    #CheckAllCompatibility(@softwares) HANDLE THIS SHIT
   end
 
   def show
