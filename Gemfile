@@ -10,8 +10,8 @@ end
 # Database relationship diagram https://github.com/voormedia/rails-erd
 gem "rails-erd"
 # Bootstrap
-gem 'bootstrap-sass'
 gem 'autoprefixer-rails'
+gem 'bootstrap-sass'
 # Jquery
 gem 'jquery-rails'
 # Font awesome (icons)

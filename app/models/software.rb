@@ -8,14 +8,13 @@ class Software < ApplicationRecord
     mac = '0'
 
     versions.each do |v|
-      linux = v.check_linux
-      windows = v.check_windows
-      mac = v.check_mac
+      compat = v.check_compat
+      linux = v.check_linux(compat)
+      windows = v.check_windows(compat)
+      mac = v.check_mac(compat)
     end
-    logger.debug "Linux: #{linux}"
-    logger.debug "Windows: #{linux}"
-    logger.debug "Mac: #{linux}"
+
     compatibility = linux + windows + mac
-    update :compatibility => compatibility
+    update compatibility: compatibility
   end
 end

@@ -3,7 +3,7 @@ class SoftwaresController < ApplicationController
 
   def index
     @softwares = Software.all
-    #CheckAllCompatibility(@softwares) HANDLE THIS SHIT
+    CheckAllCompatibility(@softwares) #HANDLE THIS SHIT
   end
 
   def show

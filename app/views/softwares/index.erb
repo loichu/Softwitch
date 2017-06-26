@@ -41,9 +41,15 @@
           <div class="col-md-2">
             <div class="cell">
               <div class="os">
-                <i class="fa fa-linux" aria-hidden="true"></i>
-                <i class="fa fa-windows" aria-hidden="true"></i>
-                <i class="fa fa-apple" aria-hidden="true"></i>
+                <% if software.compatibility[0] == '1' %>
+                  <i class="fa fa-linux" aria-hidden="true"></i>
+                <% end %>
+                <% if software.compatibility[1] == '1' %>
+                  <i class="fa fa-windows" aria-hidden="true"></i>
+                <% end %>
+                <% if software.compatibility[2] == '1' %>
+                  <i class="fa fa-apple" aria-hidden="true"></i>
+                <% end %>
               </div>
             </div>
           </div>
