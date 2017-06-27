@@ -1,0 +1,85 @@
+// Place all the styles related to the Softwares controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+@import "custom_components/responsive_list";
+@import "custom_components/checkbox";
+@import "custom_components/checkbox_icons";
+
+.checkbox-icons{
+  #Mac {
+    /*label.checkbox {
+      width: 100%;
+      cursor: pointer;
+      overflow: hidden;
+    }*/
+
+    input[type=checkbox] {
+      float: left;
+      position: relative;
+      margin-left: -9999px;
+      i:before {
+        width: 25px;
+        content: "\f096";
+      }
+    }
+    input[type=checkbox]:checked + i:before {
+      content: "\f046";
+    }
+  }
+
+  #Linux {
+    /*label.checkbox {
+      width: 100%;
+      cursor: pointer;
+      overflow: hidden;
+    }*/
+
+    input[type=checkbox] {
+      float: left;
+      position: relative;
+      margin-left: -9999px;
+      i:before {
+        width: 25px;
+        content: "\f096";
+      }
+    }
+
+    input[type=checkbox]:checked + i:before {
+      content: "\f046";
+    }
+
+
+  }
+
+
+
+
+}
+
+
+#Windows {
+  /*label.checkbox {
+    width: 100%;
+    cursor: pointer;
+    overflow: hidden;
+  }*/
+
+  input[type=checkbox] {
+    float: left;
+    position: relative;
+    margin-left: -9999px;
+
+    i:before {
+      width: 25px;
+      content: "\f096";
+
+      input[type=checkbox]:checked + i:before {
+        content: "\f046";
+      }
+    }
+
+  }
+}
+
+
+

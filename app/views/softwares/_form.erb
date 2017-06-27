@@ -39,6 +39,20 @@
               <%= v.collection_check_boxes :operating_system_ids, @os, :id, :name %>
             </fieldset>
 
+            <div class="checkbox-icons">
+              <% @os.each do |os| %>
+                  <%= check_box_tag "version[operating_system__ids][]", os.id, v.object.operating_systems.include?(os), id: os.name, class: "checkbox-icons" %>
+                  <label for="<%= os.name %>"> <i class="icon"></i> <%= os.name %> </label>
+              <% end %>
+            </div>
+
+            <fieldset class="form-group checkbox-icons">
+              <% @os.each do |os| %>
+                  <label for="<%= os.name %>"> <%= os.name %> </label>
+                  <%= check_box_tag "version[operating_system__ids][]", os.id, v.object.operating_systems.include?(os) %>
+              <% end %>
+            </fieldset>
+
             <fieldset class="checkbox">
               <label style="padding-left: inherit">
                 <%= v.check_box :distrilog %>

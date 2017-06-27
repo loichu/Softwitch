@@ -13,9 +13,3 @@
  *= require_self
  *= require_tree .
  */
-@import bootstrap-sprockets
-@import bootstrap
-@import font-awesome
-
-body
-  padding-top: 60px
