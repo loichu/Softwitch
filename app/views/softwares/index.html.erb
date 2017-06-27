@@ -1,13 +1,17 @@
 <div class="container-fluid text-center">
   <div class="row content">
-    <div class="col-sm-8 text-left">
 
       <h1>Listing softwares</h1>
       <p id="error"><%= flash[:error] %></p>
 
-    </div>
+      <div class="list-toolbar">
+        <%= link_to 'New Software', new_software_path, :class => 'btn btn-large btn-primary' %>
+      </div>
+
   </div>
 </div>
+
+
 
 <div class="container-fluid">
   <div class="list">

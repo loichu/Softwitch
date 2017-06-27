@@ -35,8 +35,7 @@
             <hr>
 
             <fieldset class="checkbox form-group">
-              <!--<%= v.label "version_operating_system_ids_1", "Compatibility", class: "control-label" %><br>-->
-              <b ">Compatibility</b><br>
+              <b>Compatibility</b><br>
               <% @os.each do |os| %>
                   <label style="padding: 10px; padding-left: inherit" for="<%= "version_operating_system_ids_" << os.id.to_s %>">
                     <%= check_box_tag "version[operating_system_ids][]", os.id.to_s, v.object.operating_systems.include?(os), id: "version_operating_system_ids_" << os.id.to_s %>

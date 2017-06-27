@@ -59,6 +59,3 @@ class SoftwaresController < ApplicationController
       params.require(:software).permit(:name, :editor_id, :short_desc)
     end
 end
-
-# "version"=>{"operating_system__ids"=>["3", "4", "5"]
-# "version"=>{"operating_system_ids"=>["", "3", "4"]
