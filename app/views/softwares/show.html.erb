@@ -1,14 +1,35 @@
-<%= link_to 'New version', new_version_path(software_id: @software.id) %>
+<div class="container-fluid">
 
-<p>
-  <strong>Name:</strong>
-  <%= @software.name %>
-</p>
+  <h1><%= @software.name %></h1>
 
-<p>
-  <strong>Editor:</strong>
-  <%= @editor.name %>
-</p>
+  <div class="show-header">
 
-<%= link_to 'Back', softwares_path %>
-<%= link_to 'Edit', edit_software_path(@software) %>
+    <div class="editor">
+      <b>Editor : </b>
+      <%= @software.editor.name %>
+    </div>
+
+    <div class="right-column">
+      <label class="control-label">Version : </label>
+      <%= select_tag :version, options_for_select(@versions.all.map{|v|[v.name, v.id]}), {class: "form-control"} %>
+      <br>
+      <%= link_to 'New version', new_version_path(software_id: @software.id), {:class => 'btn btn-large btn-primary'} %>
+    </div>
+  </div>
+
+  <hr>
+
+  <p>
+    <strong>Name:</strong>
+    <%= @software.name %>
+  </p>
+
+  <p>
+    <strong>Editor:</strong>
+    <%= @editor.name %>
+  </p>
+
+  <%= link_to 'Back', softwares_path %>
+  <%= link_to 'Edit', edit_software_path(@software) %>
+</div>
+

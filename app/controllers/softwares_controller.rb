@@ -9,6 +9,7 @@ class SoftwaresController < ApplicationController
   def show
     @software = Software.find(params[:id])
     @editor = @software.editor
+    @versions = @software.versions
   end
 
   def new

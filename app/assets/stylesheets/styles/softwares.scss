@@ -11,4 +11,35 @@
   flex-direction: row-reverse;
 }
 
+.show-header{
+  display: flex;
+
+  .right-column{
+    padding: 10px;
+    padding-top: inherit;
+    width: 50%;
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+  }
+
+  .editor{
+    width: 40%;
+  }
+
+  select{
+    width: 80%;
+    display: inline-block;
+  }
+
+  a{
+    margin: 10px;
+    display: flex;
+    align-self: flex-end;
+  }
+
+  label{
+    padding-right: 10px;
+  }
+}
 
