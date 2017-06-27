@@ -58,26 +58,17 @@
 
 
 #Windows {
-  /*label.checkbox {
-    width: 100%;
-    cursor: pointer;
-    overflow: hidden;
-  }*/
+  float: left;
+  position: relative;
+  margin-left: -9999px;
 
-  input[type=checkbox] {
-    float: left;
-    position: relative;
-    margin-left: -9999px;
+  i:before {
+    width: 25px;
+    content: "\f096";
 
-    i:before {
-      width: 25px;
-      content: "\f096";
-
-      input[type=checkbox]:checked + i:before {
-        content: "\f046";
-      }
+    input[type=checkbox]:checked + i:before {
+      content: "\f046";
     }
-
   }
 }
 

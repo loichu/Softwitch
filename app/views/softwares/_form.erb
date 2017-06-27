@@ -34,24 +34,21 @@
             <h3>Version's details</h3>
             <hr>
 
-            <fieldset class="form-group">
+            <!--<fieldset class="form-group">
               <%= v.label :os, "Compatibility", class: "control-label" %><br>
               <%= v.collection_check_boxes :operating_system_ids, @os, :id, :name %>
-            </fieldset>
+            </fieldset>-->
 
-            <div class="checkbox-icons">
+            <fieldset class="checkbox">
               <% @os.each do |os| %>
-                  <%= check_box_tag "version[operating_system__ids][]", os.id, v.object.operating_systems.include?(os), id: os.name, class: "checkbox-icons" %>
-                  <label for="<%= os.name %>"> <i class="icon"></i> <%= os.name %> </label>
-              <% end %>
-            </div>
-
-            <fieldset class="form-group checkbox-icons">
-              <% @os.each do |os| %>
-                  <label for="<%= os.name %>"> <%= os.name %> </label>
-                  <%= check_box_tag "version[operating_system__ids][]", os.id, v.object.operating_systems.include?(os) %>
+                  <label for="<%= os.name %>">
+                    <%= check_box_tag "version[operating_system__ids][]", os.id, v.object.operating_systems.include?(os), id: os.name %>
+                    <span class="cr"><i class="cr-icon glyphicon fa fa-<%= os.name == "Mac" ? "apple" : os.name.downcase %>"></i></span>
+                    <%= os.name %>
+                  </label>
               <% end %>
             </fieldset>
+
 
             <fieldset class="checkbox">
               <label style="padding-left: inherit">
