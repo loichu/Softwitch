@@ -31,7 +31,7 @@ class SoftwaresController < ApplicationController
       @version = @software.versions.create(version_params)
 
       if @version.save
-
+        logger.debug @post.inspect
         redirect_to @software
       end
 
@@ -59,3 +59,6 @@ class SoftwaresController < ApplicationController
       params.require(:software).permit(:name, :editor_id, :short_desc)
     end
 end
+
+# "version"=>{"operating_system__ids"=>["3", "4", "5"]
+# "version"=>{"operating_system_ids"=>["", "3", "4"]
