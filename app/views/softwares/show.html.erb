@@ -11,9 +11,9 @@
 
     <div class="right-column">
       <label class="control-label">Version : </label>
-      <%= select_tag :version, options_for_select(@versions.all.map{|v|[v.name, v.id]}), {class: "form-control"} %>
+      <%= select_tag :version, options_for_select(@versions.all.map{|v|[v.name, v.id]}), {class: "form-control", id: "select-version"} %>
       <br>
-      <%= link_to 'New version', new_version_path(software_id: @software.id), {:class => 'btn btn-large btn-primary'} %>
+      <%= link_to 'New version', new_software_version_path(software_id: @software.id), {:class => 'btn btn-large btn-primary'} %>
     </div>
   </div>
 
@@ -39,3 +39,20 @@
   <%= link_to 'Edit', edit_software_path(@software) %>
 </div>
 
+<script>
+  $("#select-version").change(function() {
+      console.log("changed");
+      var version_id = $(this).val();
+
+      $.ajax({
+          method: "POST",
+          url: "/get-version-details",
+          data: {
+              id: version_id
+          }
+      })
+          .done(function(returnedDatas){
+              console.log(returnedDatas);
+          })
+  })
+</script>

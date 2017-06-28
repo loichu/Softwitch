@@ -1,10 +1,6 @@
 <h1>New Version</h1>
 
-<%= form_for @version do |v| %>
-  <%= render 'form' %>
-  <p>
-    <%= v.submit %>
-  </p>
-<% end %>
+<%= render 'form' %>
 
-<%= link_to 'Back', versions_path %>
+
+<%= link_to 'Back', software_path(@software) %>

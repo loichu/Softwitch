@@ -18,17 +18,19 @@ class VersionsController < ApplicationController
 
   def new
     check_software
-    @software = params[:software_id]
+    @software = Software.find params[:software_id]
+    #@software.versions.build
+    @os = OperatingSystem.all
     @version = Version.new
     #@version.software = Software.find(params[:software_id])
   end
 
   def create
-    @version = Version.new
-
+    @software = Software.find params[:software_id]
+    @version = @software.versions.create(version_params)
 
     if @version.save
-      redirect_to @version
+      redirect_to software_path(@software)
     else
       Rails.logger.info(@version.errors.inspect)
       render 'new'
@@ -45,7 +47,13 @@ class VersionsController < ApplicationController
     end
   end
 
+  def get_details
+    @version = Version.find params[:id]
+    render :json => @version
+  end
+
   private
+
   def version_params
     params.require(:version).permit(:name, :website)
   end

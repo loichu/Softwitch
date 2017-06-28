@@ -1,43 +1,44 @@
-<%= form_for @version do |v| %>
-    <div class="form-group">
-      <%= v.label :name, "Version's name", class: "col-md-4 control-label" %><br>
-      <div class="col-md-8">
-        <%= v.text_field :name, class: "form-control" %>
-      </div>
-    </div>
+<%= form_for [@software, @version] do |v| %>
+    <fieldset class="checkbox form-group">
+      <b>Compatibility</b><br>
+      <% @os.each do |os| %>
+          <label style="padding: 10px; padding-left: inherit" for="<%= "version_operating_system_ids_" << os.id.to_s %>">
+            <%= check_box_tag "version[operating_system_ids][]", os.id.to_s, v.object.operating_systems.include?(os), id: "version_operating_system_ids_" << os.id.to_s %>
+            <span class="cr"><i class="cr-icon glyphicon fa fa-<%= os.name == "Mac" ? "apple" : os.name.downcase %>"></i></span>
+            <%= os.name %>
+          </label>
+      <% end %>
+    </fieldset>
 
-    <div class="form-group">
-      <%= v.label :website, class: "col-md-4 control-label" %><br>
-      <div class="col-md-8">
-        <%= v.text_field :website, class: "form-control" %>
-      </div>
-    </div>
 
-    <div class="form-group">
-      <%= v.label "Release date", class: "col-md-4 control-label" %><br>
-      <div class="col-md-8">
-        <%= v.text_field :date, class: "form-control" %>
-      </div>
-    </div>
+    <fieldset class="checkbox">
+      <label style="padding-left: inherit">
+        <%= v.check_box :distrilog %>
+        <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+        This version is available in distrilog
+      </label>
+    </fieldset>
 
-    <div class="form-group">
-      <%= v.label :distrilog, class: "col-md-4 control-label" %><br>
-      <div class="col-md-8">
-        <%= v.check_box :distrilog, class: "form-control" %>
-      </div>
-    </div>
+    <fieldset class="form-group">
+      <%= v.label :name, "Version's name", class: "control-label" %><br>
+      <%= v.text_field :name, class: "form-control" %>
+    </fieldset>
 
-    <div class="form-group">
-      <%= v.label "Download link", class: "col-md-4 control-label" %><br>
-      <div class="col-md-8">
-        <%= v.text_field :install_link, class: "form-control" %>
-      </div>
-    </div>
+    <fieldset class="form-group">
+      <%= v.label :website, "Website (documentation)", class: "control-label" %><br>
+      <%= v.text_field :website, class: "form-control" %>
+    </fieldset>
 
-    <div class="form-group">
-      <%= v.label :presentation, class: "col-md-4 control-label" %><br>
-      <div class="col-md-8">
-        <%= v.text_area :presentation, class: "form-control" %>
-      </div>
-    </div>
+    <fieldset class="form-group">
+      <%= v.label "Release date", class: "control-label" %><br>
+      <%= v.text_field :date, class: "form-control" %>
+    </fieldset>
+
+
+    <fieldset class="form-group">
+      <%= v.label :install_link, "Download link", class: "control-label" %><br>
+      <%= v.text_field :install_link, class: "form-control" %>
+    </fieldset>
+
+    <%= v.submit %>
 <% end %>
