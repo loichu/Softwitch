@@ -14,13 +14,13 @@ ajaxRequest = () ->
       populate(version)
 
 populate = (version) ->
-  $("#version-name").replaceWith("<div id='version-name'>" + version.name + "</div>")
+  $("#version-name").replaceWith("<div id='version-name' class='col-md-3'>" + version.name + "</div>")
   # ToDo : handle os
   if version.distrilog
-    $("#version-distrilog").replaceWith("<div id='version-distrilog'>available</div>")
+    $("#version-distrilog").replaceWith("<div id='version-distrilog' class='col-md-3'>available</div>")
   else
-    $("#version-distrilog").replaceWith("<div id='version-distrilog'><b>not</b> available</div>")
-  $("#version-date").replaceWith("<div id='version-date'>" + version.date + "</div>")
+    $("#version-distrilog").replaceWith("<div id='version-distrilog' class='col-md-3'><b>not</b> available</div>")
+  $("#version-date").replaceWith("<div id='version-date' class='col-md-3'>" + version.date + "</div>")
 
 $ ->
   console.log("DOM is ready")
