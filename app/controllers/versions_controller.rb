@@ -8,7 +8,6 @@
 
 class VersionsController < ApplicationController
   def index
-    check_software
     @versions = Version.all
   end
 
@@ -17,12 +16,9 @@ class VersionsController < ApplicationController
   end
 
   def new
-    check_software
     @software = Software.find params[:software_id]
-    #@software.versions.build
     @os = OperatingSystem.all
     @version = Version.new
-    #@version.software = Software.find(params[:software_id])
   end
 
   def create
@@ -48,16 +44,16 @@ class VersionsController < ApplicationController
   end
 
   def get_details
-    @version = Version.find params[:id]
-    render :json => @version
+    render :json => Version.find(params[:id])
   end
 
   private
 
   def version_params
-    params.require(:version).permit(:name, :website)
+    params.require(:version).permit(:name, :website, :distrilog, :date, :install_link, { operating_system_ids:[] })
   end
 
+  # It's useless because of the nested routes
   def check_software
     if params[:software_id] == nil
       redirect_to softwares_url, :flash => { :error => "A version must correspond to a software"}

@@ -43,3 +43,11 @@
   }
 }
 
+.version-header{
+  display: flex;
+  flex-wrap: nowrap;
+
+  #version-name{
+    padding-left: 10px;
+  }
+}
