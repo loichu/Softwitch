@@ -12,6 +12,7 @@
   <tbody>
     <% @softwares.each do |software| %>
       <tr>
+        <td><%= software.name %></td>
         <td><%= link_to 'Show', software %></td>
         <td><%= link_to 'Edit', edit_software_path(software) %></td>
         <td><%= link_to 'Destroy', software, method: :delete, data: { confirm: 'Are you sure?' } %></td>
