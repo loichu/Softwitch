@@ -1,26 +1,73 @@
-<p id="notice"><%= notice %></p>
+<div class="container-fluid text-center">
+  <div class="row content">
 
-<h1>Softwares</h1>
+      <h1>Listing softwares</h1>
+      <p id="error"><%= flash[:error] %></p>
 
-<table>
-  <thead>
-    <tr>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+      <div class="list-toolbar">
+        <%= link_to 'New Software', new_software_path, :class => 'btn btn-large btn-primary' %>
+      </div>
 
-  <tbody>
+  </div>
+</div>
+
+
+
+<div class="container-fluid">
+  <div class="list">
+
+    <div class="row margin-0 list-header hidden-sm hidden-xs" style="padding: inherit">
+      <div class="col-md-3"><div class="header">Software</div></div>
+      <div class="col-md-2"><div class="header">Editor</div></div>
+      <div class="col-md-2"><div class="header">OS</div></div>
+      <div class="col-md-5"><div class="header">Description</div></div>
+    </div>
+
     <% @softwares.each do |software| %>
-      <tr>
-        <td><%= software.name %></td>
-        <td><%= link_to 'Show', software %></td>
-        <td><%= link_to 'Edit', edit_software_path(software) %></td>
-        <td><%= link_to 'Destroy', software, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+        <div class="row margin-0" onclick="location.href='<%= software_path(software) %>';" style="cursor: pointer;">
+
+          <div class="col-md-3">
+            <div class="cell">
+              <div class="software">
+                <%= software.name %>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-2">
+            <div class="cell">
+              <div class="editor">
+                <%= software.editor.name %>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-2">
+            <div class="cell">
+              <div class="os">
+                <% if software.compatibility[0] == '1' %>
+                  <i class="fa fa-linux" aria-hidden="true"></i>
+                <% end %>
+                <% if software.compatibility[1] == '1' %>
+                  <i class="fa fa-windows" aria-hidden="true"></i>
+                <% end %>
+                <% if software.compatibility[2] == '1' %>
+                  <i class="fa fa-apple" aria-hidden="true"></i>
+                <% end %>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-5">
+            <div class="cell">
+              <div class="description">
+                <%= software.short_desc %>
+              </div>
+            </div>
+          </div>
+        </div>
     <% end %>
-  </tbody>
-</table>
 
-<br>
+  </div>
+</div>
 
-<%= link_to 'New Software', new_software_path %>

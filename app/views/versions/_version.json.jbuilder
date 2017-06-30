@@ -1,2 +1,2 @@
-json.extract! version, :id, :created_at, :updated_at
+json.merge! version.attributes
 json.url version_url(version, format: :json)

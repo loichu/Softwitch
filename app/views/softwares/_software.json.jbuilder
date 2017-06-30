@@ -1,2 +1,2 @@
-json.extract! software, :id, :created_at, :updated_at
+json.merge! software.attributes
 json.url software_url(software, format: :json)

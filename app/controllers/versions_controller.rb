@@ -5,7 +5,7 @@
 ## presentation string
 ## software_id integer FK
 ## website string
-
+class VersionsController < ApplicationController
   # GET /versions
   # GET /versions.json
   def index
@@ -79,9 +79,10 @@
     end
 
   def version_params
-    params.require(:version).permit(:name, :website)
+    params.require(:version).permit(:name, :website, :distrilog, :date, :install_link, { operating_system_ids:[] })
   end
 
+  # It's useless because of the nested routes
   def check_software
     if params[:software_id] == nil
       redirect_to softwares_url, :flash => { :error => "A version must correspond to a software"}

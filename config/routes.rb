@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   # Resources
   resources :softwares do
-    resources :versions #, shallow: true
+    resources :versions, shallow: true
   end
   resources :editors
   resources :operating_systems

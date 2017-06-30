@@ -5,8 +5,8 @@ ajaxRequest = () ->
   version_id = $("#select-version").val()
 
   $.ajax
-    method: "POST",
-    url: "/get-version-details",
+    method: "GET",
+    url: "/versions/" + version_id + ".json",
     data: {
       id: version_id
     }

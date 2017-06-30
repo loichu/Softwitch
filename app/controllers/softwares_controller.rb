@@ -1,24 +1,33 @@
 class SoftwaresController < ApplicationController
   before_action :set_software, only: [:show, :edit, :update, :destroy]
+  include SoftwaresHelper
 
   # GET /softwares
   # GET /softwares.json
   def index
     @softwares = Software.all
+    CheckAllCompatibility(@softwares)
   end
 
   # GET /softwares/1
   # GET /softwares/1.json
   def show
+    @software = Software.find(params[:id])
+    @editor = @software.editor
+    @versions = @software.versions
   end
 
   # GET /softwares/new
   def new
     @software = Software.new
+    @software.versions.build
+    @editors = Editor.all
+    @os = OperatingSystem.all
   end
 
   # GET /softwares/1/edit
   def edit
+    @sofware = Software.find(params[:id])
   end
 
   # POST /softwares
@@ -28,11 +37,14 @@ class SoftwaresController < ApplicationController
 
     respond_to do |format|
       if @software.save
-        format.html { redirect_to @software, notice: 'Software was successfully created.' }
-        format.json { render :show, status: :created, location: @software }
-      else
-        format.html { render :new }
-        format.json { render json: @software.errors, status: :unprocessable_entity }
+	@version = @software.versions.create(version_params)
+	if @version.save
+	  format.html { redirect_to @software, notice: 'Software was successfully created.' }
+	  format.json { render :show, status: :created, location: @software }
+        else
+	  format.html { render :new }
+	  format.json { render json: @software.errors, status: :unprocessable_entity }
+        end
       end
     end
   end
@@ -62,13 +74,17 @@ class SoftwaresController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_software
-      @software = Software.find(params[:id])
+
+  def set_software
+    @software = Software.find(params[:id])
+  end
+
+    def version_params
+      params.require(:version).permit(:name, :website, :distrilog, :date, :install_link, { operating_system_ids:[] })
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def software_params
-      params.fetch(:software, {})
+      params.require(:software).permit(:name, :editor_id, :short_desc)
     end
 end
