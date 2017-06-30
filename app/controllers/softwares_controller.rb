@@ -1,12 +1,10 @@
 class SoftwaresController < ApplicationController
   before_action :set_software, only: [:show, :edit, :update, :destroy]
-  include SoftwaresHelper
 
   # GET /softwares
   # GET /softwares.json
   def index
     @softwares = Software.all
-    CheckAllCompatibility(@softwares)
   end
 
   # GET /softwares/1
@@ -26,7 +24,7 @@ class SoftwaresController < ApplicationController
 
   # GET /softwares/1/edit
   def edit
-    # View is loaded automatically
+    @editors = Editor.all
   end
 
   # POST /softwares
@@ -38,7 +36,6 @@ class SoftwaresController < ApplicationController
       if @software.save
         @version = @software.versions.create(version_params)
         if @version.save
-          @software.check_compatibility
           format.html { redirect_to @software, notice: 'Software was successfully created.' }
           format.json { render :show, status: :created, location: @software }
         else

@@ -20,7 +20,7 @@ class VersionsController < ApplicationController
 
   # GET /versions/1/edit
   def edit
-    # The view is automatically loaded
+    @software = Software.find(params[:software_id])
   end
 
   # POST /softwares/:software_id/versions
