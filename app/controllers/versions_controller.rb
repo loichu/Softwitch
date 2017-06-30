@@ -1,15 +1,7 @@
-## date date
-## distrilog boolean
-## installLink string
-## name string
-## presentation string
-## software_id integer FK
-## website string
 class VersionsController < ApplicationController
-  # GET /versions
-  # GET /versions.json
+  # GET /softwares/:software_id/versions
+  # GET /softwares/:software_id/versions.json
   def index
-    check_software
     @versions = Version.all
   end
 
@@ -19,9 +11,8 @@ class VersionsController < ApplicationController
     @version = Version.find(params[:id])
   end
 
-  # GET /versions/new
+  # GET /softwares/:software_id/versions/new
   def new
-    check_software
     @software = Software.find params[:software_id]
     @os = OperatingSystem.all
     @version = Version.new
@@ -29,10 +20,11 @@ class VersionsController < ApplicationController
 
   # GET /versions/1/edit
   def edit
+    # The view is automatically loaded
   end
 
-  # POST /versions
-  # POST /versions.json
+  # POST /softwares/:software_id/versions
+  # POST /softwares/:software_id/versions.json
   def create
     @software = Software.find params[:software_id]
     @version = @software.versions.create(version_params)
@@ -73,10 +65,11 @@ class VersionsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_version
-      @version = Version.find(params[:id])
-    end
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_version
+    @version = Version.find(params[:id])
+  end
 
   def version_params
     params.require(:version).permit(:name, :website, :distrilog, :date, :install_link, { operating_system_ids:[] })
