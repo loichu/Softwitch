@@ -12,7 +12,6 @@ class SoftwaresController < ApplicationController
   # GET /softwares/1
   # GET /softwares/1.json
   def show
-    @software = Software.find(params[:id])
     @editor = @software.editor
     @versions = @software.versions
   end
@@ -27,7 +26,7 @@ class SoftwaresController < ApplicationController
 
   # GET /softwares/1/edit
   def edit
-    @sofware = Software.find(params[:id])
+    # View is loaded automatically
   end
 
   # POST /softwares
@@ -37,13 +36,14 @@ class SoftwaresController < ApplicationController
 
     respond_to do |format|
       if @software.save
-	@version = @software.versions.create(version_params)
-	if @version.save
-	  format.html { redirect_to @software, notice: 'Software was successfully created.' }
-	  format.json { render :show, status: :created, location: @software }
+        @version = @software.versions.create(version_params)
+        if @version.save
+          @software.check_compatibility
+          format.html { redirect_to @software, notice: 'Software was successfully created.' }
+          format.json { render :show, status: :created, location: @software }
         else
-	  format.html { render :new }
-	  format.json { render json: @software.errors, status: :unprocessable_entity }
+          format.html { render :new }
+          format.json { render json: @software.errors, status: :unprocessable_entity}
         end
       end
     end
@@ -79,12 +79,12 @@ class SoftwaresController < ApplicationController
     @software = Software.find(params[:id])
   end
 
-    def version_params
-      params.require(:version).permit(:name, :website, :distrilog, :date, :install_link, { operating_system_ids:[] })
-    end
+  def version_params
+    params.require(:version).permit(:name, :website, :distrilog, :date, :install_link, { operating_system_ids:[] })
+  end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def software_params
-      params.require(:software).permit(:name, :editor_id, :short_desc)
-    end
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def software_params
+    params.require(:software).permit(:name, :editor_id, :short_desc)
+  end
 end

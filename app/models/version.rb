@@ -5,6 +5,8 @@ class Version < ApplicationRecord
   has_and_belongs_to_many :operating_systems
   has_and_belongs_to_many  :pcs
 
+  #after_save self.soft
+
   def check_linux(compat)
     (compat.include? 'Linux') ? '1' : '0'
   end
