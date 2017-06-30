@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   get 'welcome/index'
-  match '/get-version-details' => 'versions#get_details', via: [:get, :post]
+  match '/get-compatible-os' => 'versions#get_os', via: [:get, :post]
 
   # Resources
   resources :softwares do

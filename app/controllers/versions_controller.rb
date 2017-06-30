@@ -39,7 +39,7 @@ class VersionsController < ApplicationController
 
     respond_to do |format|
       if @version.save
-        format.html { redirect_to @version, notice: 'Version was successfully created.' }
+        format.html { redirect_to @software, notice: 'Version was successfully created.' }
         format.json { render :show, status: :created, location: @version }
       else
         format.html { render :new }
@@ -80,12 +80,5 @@ class VersionsController < ApplicationController
 
   def version_params
     params.require(:version).permit(:name, :website, :distrilog, :date, :install_link, { operating_system_ids:[] })
-  end
-
-  # It's useless because of the nested routes
-  def check_software
-    if params[:software_id] == nil
-      redirect_to softwares_url, :flash => { :error => "A version must correspond to a software"}
-    end
   end
 end

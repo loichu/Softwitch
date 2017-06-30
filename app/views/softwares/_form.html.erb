@@ -1,17 +1,85 @@
-<%= form_with(model: software, local: true) do |form| %>
-  <% if software.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(software.errors.count, "error") %> prohibited this software from being saved:</h2>
+<%= form_for @software do |s| %>
+    <% if @software.errors.any? %>
+        <div id="error_explanation">
+          <h2>
+            <%= pluralize(@software.errors.count, "error") %> prohibited
+            this software from being saved:
+          </h2>
+          <ul>
+            <% @software.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+            <% end %>
+          </ul>
+        </div>
+    <% end %>
 
-      <ul>
-      <% software.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+    <fieldset class="form-group">
+      <%= s.label :name, "Software's name", class: "control-label" %><br>
+      <%= s.text_field :name, class: "form-control" %>
+    </fieldset>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+    <fieldset class="form-group">
+      <%= s.label :editor_id, class: "control-label" %><br>
+      <%= s.select :editor_id, options_for_select(@editors.all.map{|e|[e.name, e.id]}), {}, class: "form-control" %>
+    </fieldset>
+
+    <fieldset class="form-group">
+      <%= s.label :short_desc, "Short description", class: "control-label" %><br>
+      <%= s.text_field :short_desc, class: "form-control" %>
+    </fieldset>
+
+    <% if @software.new_record? %>
+        <%= fields_for :version, Version.new do |v| %>
+            <h3>Version's details</h3>
+            <hr>
+
+            <fieldset class="checkbox form-group">
+              <b>Compatibility</b><br>
+              <% @os.each do |os| %>
+                  <label style="padding: 10px; padding-left: inherit" for="<%= "version_operating_system_ids_" << os.id.to_s %>">
+                    <%= check_box_tag "version[operating_system_ids][]", os.id.to_s, v.object.operating_systems.include?(os), id: "version_operating_system_ids_" << os.id.to_s %>
+                    <span class="cr"><i class="cr-icon glyphicon fa fa-<%= os.name == "Mac" ? "apple" : os.name.downcase %>"></i></span>
+                    <%= os.name %>
+                  </label>
+              <% end %>
+            </fieldset>
+
+
+            <fieldset class="checkbox">
+              <label style="padding-left: inherit">
+                <%= v.check_box :distrilog %>
+                <span class="cr"><i class="cr-icon glyphicon glyphicon-ok"></i></span>
+                This version is available in distrilog
+              </label>
+            </fieldset>
+
+            <fieldset class="form-group">
+              <%= v.label :name, "Version's name", class: "control-label" %><br>
+              <%= v.text_field :name, class: "form-control" %>
+            </fieldset>
+
+            <fieldset class="form-group">
+              <%= v.label :website, "Website (documentation)", class: "control-label" %><br>
+              <%= v.text_field :website, class: "form-control" %>
+            </fieldset>
+
+            <fieldset class="form-group">
+              <%= v.label "Release date", class: "control-label" %><br>
+              <%= v.text_field :date, class: "form-control" %>
+            </fieldset>
+
+
+            <fieldset class="form-group">
+              <%= v.label :install_link, "Download link", class: "control-label" %><br>
+              <%= v.text_field :install_link, class: "form-control" %>
+            </fieldset>
+        <% end %>
+    <% end %>
+
+    <p>
+      <%= s.submit %>
+    </p>
+
 <% end %>
+
+
