@@ -1,4 +1,6 @@
 class VersionsController < ApplicationController
+  before_action :set_version, only: [:show, :edit, :update, :destroy]
+
   # GET /softwares/:software_id/versions
   # GET /softwares/:software_id/versions.json
   def index
@@ -21,6 +23,7 @@ class VersionsController < ApplicationController
   # GET /versions/1/edit
   def edit
     @software = Software.find(params[:software_id])
+    @os = OperatingSystem.all
   end
 
   # POST /softwares/:software_id/versions
