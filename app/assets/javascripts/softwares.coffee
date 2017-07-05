@@ -1,17 +1,7 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
-
-
-#$('#details a').click (e) ->
-#  e.preventDefault()
-#  $(this).tab('show')
-
-
-#$('#presentation a').click (e) ->
-#  e.preventDefault()
-#  $(this).tab('show')
-
+# Function :
+openInNewTab = (url) ->
+  win = window.open(url, '_blank')
+  win.focus()
 
 cleanOsIcons = () ->
   $("#version-os-windows").empty()
@@ -33,9 +23,6 @@ ajaxRequest = () ->
 populate = (version) ->
   $("#version-name").replaceWith("<div id='version-name' class='col-md-3'>" + version.name + "</div>")
   cleanOsIcons()
-  # ToDo : handle os
-  # os = {}
-  #os = version.operating_systems
   for os in version.operating_systems
     if os.name == "Windows"
       $("#version-os-windows").append("<i class='fa fa-windows' aria-hidden='true'></i>")
@@ -56,7 +43,23 @@ populate = (version) ->
   else
     $("#version-date").replaceWith("<div id='version-date' class='col-md-3'>not specified</div>")
 
+  if version.install_link
+    $('#dl-link').attr("data-url", version.install_link)
+    $('#dl-link').attr("disabled", false)
+  else
+    $('#dl-link').attr("data-url", "#")
+    $('#dl-link').attr("disabled", true)
 
+  if version.website
+    $('#doc-link').attr("data-url", version.website)
+    $('#doc-link').attr("disabled", false)
+  else
+    $('#doc-link').attr("data-url", "#")
+    $('#doc-link').attr("disabled", true)
+
+
+
+# Jquery :
 $ ->
   console.log("DOM is ready")
   ajaxRequest()
@@ -64,3 +67,8 @@ $ ->
 
   $("#select-version").change ->
     ajaxRequest()
+
+  $(".extern-link").click ->
+    console.log("im in !")
+    url = $(this).data(url)
+    console.dir(openInNewTab(url))

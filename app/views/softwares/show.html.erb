@@ -1,6 +1,6 @@
 <div class="container-fluid">
 
-<p id="notice"><%= notice %></p>
+  <p id="notice"><%= notice %></p>
 
   <h1><%= @software.name %></h1>
 
@@ -64,8 +64,8 @@
           </dl>
 
           <div class="link-buttons">
-            <a id="dl-link" class="btn-sm btn-primary" href="#">Download</a>
-            <a id="doc-link" class="btn-sm btn-primary" href="#">Visit website</a>
+            <button id="dl-link" class="btn btn-sm btn-primary extern-link" data-url="#" type="button">Download</button>
+            <button id="doc-link" class="btn btn-sm btn-primary extern-link" data-url="#" type="button">Visit website</button>
           </div>
         </div>
       </div>
