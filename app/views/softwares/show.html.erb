@@ -8,7 +8,9 @@
 
     <div class="editor">
       <b>Editor : </b>
-      <%= @software.editor.name %>
+      <%= @software.editor.name %><br>
+      <b>Short description :</b>
+      <%= @software.short_desc %>
     </div>
 
     <div class="right-column">
@@ -21,60 +23,66 @@
 
   <hr>
 
-  <!--
-  /!\
-  All the fields in this area are filled with JQuery
-  See assets/javascript/softwares.coffee
-  -->
   <div class="version-header">
     <strong><%= @software.name %></strong>
     <div id="version-name"></div>
   </div>
 
-  <div class="version-details">
-    <div class="row">
-      <div class="version-os">
-        <div class="col-md-3"><strong>OS</strong></div>
-        <div id="os-icons" class="col-md-2">
-          <div id="version-os-windows" class="col-md-2"></div>
-          <div id="version-os-linux" class="col-md-2"></div>
-          <div id="version-os-apple" class="col-md-2"></div>
+  <div>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation"><a href="#details" aria-controls="details" aria-expanded="true" role="tab" data-toggle="tab">Details</a></li>
+      <li role="presentation"><a href="#presentation" aria-controls="presentation" role="tab" data-toggle="tab">Presentation</a></li>
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content" id="version-desc">
+      <div role="tabpanel" class="tab-pane fade active" id="details">
+        <!--
+        /!\
+        All fields in this area are filled with JQuery (AJAX)
+        See assets/javascript/softwares.coffee
+        -->
+        <div class="version-details bs-callout bs-callout-info">
+          <dl class="dl-horizontal">
+            <dt>OS</dt>
+            <dd>
+              <div id="version-os-windows" class="os-icon"></div>
+              <div id="version-os-linux" class="os-icon"></div>
+              <div id="version-os-apple" class="os-icon"></div>
+            </dd>
+
+            <dt>Release date</dt>
+            <dd>
+              <div id="version-date"></div>
+            </dd>
+
+            <dt>Distrilog</dt>
+            <dd>
+              <div id="version-distrilog"></div>
+            </dd>
+          </dl>
+
+          <div class="link-buttons">
+            <a id="dl-link" class="btn-sm btn-primary" href="#">Download</a>
+            <a id="doc-link" class="btn-sm btn-primary" href="#">Visit website</a>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="row">
-      <div class="version-distrilog">
-        <div class="col-md-3"><strong>Distrilog</strong></div>
-        <div id="version-distrilog" class="col-md-3"></div>
-      </div>
-
-      <div class="col-md-6">
-        <a id="doc-link" class="btn-xs btn-primary" href="#">Visit website</a>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="version-date">
-        <div class="col-md-3"><strong>Release date</strong></div>
-        <div id="version-date" class="col-md-3"></div>
-      </div>
-
-      <div class="col-md-6">
-        <a id="dl-link" class="btn-xs btn-primary" href="#">Download</a>
-      </div>
-    </div>
-
-
-    <div class="col-md-6">
-      <div class="link-buttons">
-
-
+      <div role="tabpanel" class="tab-pane fade" id="presentation">
+        <h1>Presentation</h1>
       </div>
     </div>
   </div>
-
-
   <%= link_to 'Back', softwares_path %>
   <%= link_to 'Edit', edit_software_path(@software) %>
 </div>
+
+
+
+
+
+
+
+

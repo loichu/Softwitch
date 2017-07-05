@@ -1,6 +1,18 @@
 # Place all the behaviors and hooks related to the matching controller here.
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
+
+
+#$('#details a').click (e) ->
+#  e.preventDefault()
+#  $(this).tab('show')
+
+
+#$('#presentation a').click (e) ->
+#  e.preventDefault()
+#  $(this).tab('show')
+
+
 cleanOsIcons = () ->
   $("#version-os-windows").empty()
   $("#version-os-linux").empty()
@@ -39,12 +51,16 @@ populate = (version) ->
   else
     $("#version-distrilog").replaceWith("<div id='version-distrilog' class='col-md-3'><b>not</b> available</div>")
 
-  $("#version-date").replaceWith("<div id='version-date' class='col-md-3'>" + version.date + "</div>")
+  if version.date
+    $("#version-date").replaceWith("<div id='version-date' class='col-md-3'>" + version.date + "</div>")
+  else
+    $("#version-date").replaceWith("<div id='version-date' class='col-md-3'>not specified</div>")
 
 
 $ ->
   console.log("DOM is ready")
   ajaxRequest()
+  $('.nav-tabs a[href="#details"]').tab('show')
 
   $("#select-version").change ->
     ajaxRequest()
