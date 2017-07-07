@@ -22,7 +22,6 @@ class VersionsController < ApplicationController
 
   # GET /versions/1/edit
   def edit
-    @software = Software.find(params[:software_id])
     @os = OperatingSystem.all
   end
 

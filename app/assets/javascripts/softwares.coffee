@@ -57,10 +57,16 @@ populate = (version) ->
 
 
 # Jquery :
+
+
 $ ->
   console.log("DOM is ready")
-  ajaxRequest()
+
+  if $(".show").length > 0
+    ajaxRequest()
+
   $('.nav-tabs a[href="#details"]').tab('show')
 
-  $("#select-version").change ->
+  $(".show #select-version").change ->
     ajaxRequest()
+

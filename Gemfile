@@ -16,6 +16,8 @@ gem 'bootstrap-sass'
 gem 'jquery-rails'
 # Font awesome (icons)
 gem 'font-awesome-rails'
+# Jquery UI
+gem 'jquery-ui-rails'
 #---------------
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'

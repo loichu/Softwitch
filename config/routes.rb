@@ -3,10 +3,10 @@ Rails.application.routes.draw do
 
   # This is for accessing software's versions
   resources :softwares do
-    resources :versions, only: [:show, :index, :new, :create, :edit, :update]
+    resources :versions, only: [:show, :index, :new, :create]
   end
   # This is for accessing version alone
-  resources :versions, only: [:show, :destroy]
+  resources :versions, only: [:show, :destroy, :edit, :update]
 
   resources :editors
 
