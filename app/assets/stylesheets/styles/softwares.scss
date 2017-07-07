@@ -43,3 +43,34 @@
   }
 }
 
+.version-header{
+  display: flex;
+  flex-wrap: nowrap;
+
+  #version-name{
+    padding-left: 10px;
+  }
+}
+
+.os-icon{
+  padding-left: 15px;
+  display: inline;
+}
+
+.link-buttons{
+  margin-left: 100px;
+}
+
+#dl-link #doc-link{
+  .disabled{
+    pointer-events: inherit;
+    cursor: not-allowed;
+  }
+}
+
+.external-link{
+  .disabled{
+    pointer-events: inherit;
+    cursor: not-allowed;
+  }
+}

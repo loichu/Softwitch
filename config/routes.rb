@@ -1,16 +1,23 @@
 Rails.application.routes.draw do
   get 'welcome/index'
-  match '/get-version-details' => 'versions#get_details', via: [:get, :post]
 
-  # Resources
+  # This is for accessing software's versions
   resources :softwares do
-    resources :versions #, shallow: true
+    resources :versions, only: [:show, :index, :new, :create, :edit, :update]
   end
+  # This is for accessing version alone
+  resources :versions, only: [:show, :destroy]
+
   resources :editors
+
   resources :operating_systems
+
   resources :pcs
+
   resources :rooms
+
   resources :tags
+
   resources :people
 
   root 'welcome#index'

@@ -1,12 +1,16 @@
 <div class="container-fluid">
 
+  <p id="notice"><%= notice %></p>
+
   <h1><%= @software.name %></h1>
 
   <div class="show-header">
 
     <div class="editor">
       <b>Editor : </b>
-      <%= @software.editor.name %>
+      <%= @software.editor.name %><br>
+      <b>Short description :</b>
+      <%= @software.short_desc %>
     </div>
 
     <div class="right-column">
@@ -19,40 +23,58 @@
 
   <hr>
 
-  <!--
-  TODO:
-  Get version's info in ajax.
-  The version displayed must be the one selected.
-  -->
+  <div class="version-header">
+    <strong><%= @software.name %></strong>
+    <div id="version-name"></div>
+  </div>
 
-  <p>
-    <strong>Software:</strong>
-    <%= @software.name %>
-  </p>
+  <div>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation"><a href="#details" aria-controls="details" aria-expanded="true" role="tab" data-toggle="tab">Details</a></li>
+      <li role="presentation"><a href="#presentation" aria-controls="presentation" role="tab" data-toggle="tab">Presentation</a></li>
+    </ul>
 
-  <p>
-    <strong>Version:</strong>
-    version
-  </p>
+    <!-- Tab panes -->
+    <div class="tab-content" id="version-desc">
+      <div role="tabpanel" class="tab-pane fade active" id="details">
+        <!--
+        /!\
+        All fields in this area are filled with JQuery (AJAX)
+        See assets/javascript/softwares.coffee
+        -->
+        <div class="version-details bs-callout bs-callout-info">
+          <dl class="dl-horizontal">
+            <dt>OS</dt>
+            <dd>
+              <div id="version-os-windows" class="os-icon"></div>
+              <div id="version-os-linux" class="os-icon"></div>
+              <div id="version-os-apple" class="os-icon"></div>
+            </dd>
 
+            <dt>Release date</dt>
+            <dd>
+              <div id="version-date"></div>
+            </dd>
+
+            <dt>Distrilog</dt>
+            <dd>
+              <div id="version-distrilog"></div>
+            </dd>
+          </dl>
+
+          <div class="link-buttons">
+            <%= link_to "Download", "#", :target => "_blank", id: "dl-link", :class => "btn btn-sm btn-primary external-link" %>
+            <%= link_to "Visit website", "#", :target => "_blank", id: "doc-link", :class => "btn btn-sm btn-primary external-link" %>
+          </div>
+        </div>
+      </div>
+
+      <div role="tabpanel" class="tab-pane fade" id="presentation">
+        <h1>Presentation</h1>
+      </div>
+    </div>
+  </div>
   <%= link_to 'Back', softwares_path %>
   <%= link_to 'Edit', edit_software_path(@software) %>
 </div>
-
-<script>
-  $("#select-version").change(function() {
-      console.log("changed");
-      var version_id = $(this).val();
-
-      $.ajax({
-          method: "POST",
-          url: "/get-version-details",
-          data: {
-              id: version_id
-          }
-      })
-          .done(function(returnedDatas){
-              console.log(returnedDatas);
-          })
-  })
-</script>
