@@ -60,3 +60,17 @@
 .link-buttons{
   margin-left: 100px;
 }
+
+#dl-link #doc-link{
+  .disabled{
+    pointer-events: inherit;
+    cursor: not-allowed;
+  }
+}
+
+.external-link{
+  .disabled{
+    pointer-events: inherit;
+    cursor: not-allowed;
+  }
+}

@@ -1,8 +1,4 @@
 # Function :
-openInNewTab = (url) ->
-  win = window.open(url, '_blank')
-  win.focus()
-
 cleanOsIcons = () ->
   $("#version-os-windows").empty()
   $("#version-os-linux").empty()
@@ -44,18 +40,19 @@ populate = (version) ->
     $("#version-date").replaceWith("<div id='version-date' class='col-md-3'>not specified</div>")
 
   if version.install_link
-    $('#dl-link').attr("data-url", version.install_link)
+    $('#dl-link').attr("href", version.install_link)
+    #$('#dl-link').removeClass("disabled")
     $('#dl-link').attr("disabled", false)
   else
-    $('#dl-link').attr("data-url", "#")
-    $('#dl-link').attr("disabled", true)
+    $('#dl-link').attr("href", "#")
+    $('#dl-link').addClass("disabled")
 
   if version.website
-    $('#doc-link').attr("data-url", version.website)
-    $('#doc-link').attr("disabled", false)
+    $('#doc-link').attr("href", version.website)
+    $('#doc-link').removeClass("disabled")
   else
-    $('#doc-link').attr("data-url", "#")
-    $('#doc-link').attr("disabled", true)
+    $('#doc-link').attr("href", "#")
+    $('#doc-link').addClass("disabled")
 
 
 
@@ -67,8 +64,3 @@ $ ->
 
   $("#select-version").change ->
     ajaxRequest()
-
-  $(".extern-link").click ->
-    console.log("im in !")
-    url = $(this).data(url)
-    console.dir(openInNewTab(url))

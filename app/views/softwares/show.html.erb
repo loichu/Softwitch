@@ -64,8 +64,8 @@
           </dl>
 
           <div class="link-buttons">
-            <button id="dl-link" class="btn btn-sm btn-primary extern-link" data-url="#" type="button">Download</button>
-            <button id="doc-link" class="btn btn-sm btn-primary extern-link" data-url="#" type="button">Visit website</button>
+            <%= link_to "Download", "#", :target => "_blank", id: "dl-link", :class => "btn btn-sm btn-primary external-link" %>
+            <%= link_to "Visit website", "#", :target => "_blank", id: "doc-link", :class => "btn btn-sm btn-primary external-link" %>
           </div>
         </div>
       </div>
