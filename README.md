@@ -1,5 +1,7 @@
 # README
 
+The README hasn't been improved yet. A procedure to run my project is comming.
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
