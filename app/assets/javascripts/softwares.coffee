@@ -67,6 +67,10 @@ $ ->
 
   $('.nav-tabs a[href="#details"]').tab('show')
 
+  $(".show #select-version").select2(
+    theme: "bootstrap"
+  )
+
   $(".show #select-version").change ->
     ajaxRequest()
 

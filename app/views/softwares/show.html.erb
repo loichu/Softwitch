@@ -22,9 +22,12 @@
 
     <div class="right-column">
       <label class="control-label">Version : </label>
-      <%= select_tag :version, options_for_select(@versions.all.map{|v|[v.name, v.id]}), {class: "form-control", id: "select-version"} %>
+      <%= select_tag :version, options_for_select(@versions.all.map{|v|[v.name, v.id]}),
+                     {class: "form-control",
+                      id: "select-version"} %>
       <br>
-      <%= link_to 'New version', new_software_version_path(software_id: @software.id), {:class => 'btn btn-large btn-primary isolated'} %>
+      <%= link_to 'New version', new_software_version_path(software_id: @software.id),
+                  {:class => 'btn btn-large btn-primary isolated'} %>
     </div>
   </div>
 
