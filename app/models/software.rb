@@ -1,6 +1,6 @@
 class Software < ApplicationRecord
   belongs_to :editor
-  has_many :versions
+  has_many :versions, dependent: :destroy
 
   def check_compatibility
     linux = '0'

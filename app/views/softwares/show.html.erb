@@ -1,4 +1,5 @@
 <div class="container-fluid">
+  <%= link_to 'Back', softwares_path, class: "btn btn-primary" %>
 
   <p id="notice"><%= notice %></p>
 
@@ -6,18 +7,24 @@
 
   <div class="show-header">
 
-    <div class="editor">
+    <div class="software-details">
       <b>Editor : </b>
       <%= @software.editor.name %><br>
       <b>Short description :</b>
       <%= @software.short_desc %>
+      <br>
+
+      <div class="btn-group isolated" role="group">
+        <%= link_to 'Edit', edit_software_path(@software), class: "btn btn-default btn-xs" %>
+        <%= link_to 'Destroy',  @software,  method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs" %>
+      </div>
     </div>
 
     <div class="right-column">
       <label class="control-label">Version : </label>
       <%= select_tag :version, options_for_select(@versions.all.map{|v|[v.name, v.id]}), {class: "form-control", id: "select-version"} %>
       <br>
-      <%= link_to 'New version', new_software_version_path(software_id: @software.id), {:class => 'btn btn-large btn-primary'} %>
+      <%= link_to 'New version', new_software_version_path(software_id: @software.id), {:class => 'btn btn-large btn-primary isolated'} %>
     </div>
   </div>
 
@@ -44,6 +51,12 @@
         See assets/javascript/softwares.coffee
         -->
         <div class="version-details bs-callout bs-callout-info">
+
+          <div class="btn-group isolated" role="group">
+            <%= link_to 'Edit', edit_software_path(@software), class: "btn btn-default btn-xs" %>
+            <%= link_to 'Destroy',  @software,  method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs" %>
+          </div>
+
           <dl class="dl-horizontal">
             <dt>OS</dt>
             <dd>
@@ -75,6 +88,4 @@
       </div>
     </div>
   </div>
-  <%= link_to 'Back', softwares_path %>
-  <%= link_to 'Edit', edit_software_path(@software) %>
 </div>

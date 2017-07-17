@@ -1,6 +1,9 @@
-<h1>Editing Software</h1>
+<div class="container-fluid">
 
-<%= render 'form', software: @software %>
+  <%= link_to 'Back', @software, class: "btn btn-primary" %>
 
-<%= link_to 'Show', @software %> |
-<%= link_to 'Back', softwares_path %>
+  <h1>Editing Software</h1>
+
+  <%= render 'form', software: @software %>
+
+</div>
