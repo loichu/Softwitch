@@ -4,15 +4,12 @@ cleanOsIcons = () ->
   $("#version-os-linux").empty()
   $("#version-os-apple").empty()
 
-ajaxRequest = () ->
+ajaxVersionDetails = () ->
   version_id = $("#select-version").val()
 
   $.ajax
     method: "GET",
-    url: "/versions/" + version_id + ".json",
-    data: {
-      id: version_id
-    }
+    url: "/versions/" + version_id + ".json"
     success: (version) ->
       populate(version)
 
@@ -54,16 +51,23 @@ populate = (version) ->
     $('#doc-link').attr("href", "#")
     $('#doc-link').addClass("disabled")
 
-
+ajaxDeleteVersion = () ->
+  version_id = $("#select-version").val()
+  # TODO:
+  # Confirmation message, select first in select-version, populate
+  $.ajax
+    method: 'DELETE'
+    url: "/versions/" + version_id + ".json"
+    success: ->
+      $('#select-version option[value=' + version_id + ']').remove()
+      alert("deleted")
 
 # Jquery :
-
-
 $ ->
   console.log("DOM is ready")
 
   if $(".show").length > 0
-    ajaxRequest()
+    ajaxVersionDetails()
 
   $('.nav-tabs a[href="#details"]').tab('show')
 
@@ -72,5 +76,8 @@ $ ->
   )
 
   $(".show #select-version").change ->
-    ajaxRequest()
+    ajaxVersionDetails()
+
+  $('#destroy-version').click ->
+    ajaxDeleteVersion()
 
