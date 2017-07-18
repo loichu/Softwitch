@@ -23,6 +23,7 @@ class VersionsController < ApplicationController
   # GET /versions/1/edit
   def edit
     @os = OperatingSystem.all
+    @software = @version.software
   end
 
   # POST /softwares/:software_id/versions

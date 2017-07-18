@@ -1,6 +1,9 @@
-<h1>Editing Version</h1>
+<div class="container-fluid">
+  <%= link_to 'Back', software_path(@software), method: :get, class: "btn btn-primary" %>
 
-<%= render 'form', version: @version %>
+  <h1>Editing Version</h1>
 
-<%= link_to 'Show', @version %> |
-<%= link_to 'Back', software_path %>
+  <%= render 'form', version: @version %>
+
+  <%= link_to 'Show', @version %> |
+</div>

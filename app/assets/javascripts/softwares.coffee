@@ -14,7 +14,7 @@ ajaxVersionDetails = () ->
       populate(version)
 
 populate = (version) ->
-  $("#version-name").replaceWith("<div id='version-name' class='col-md-3'>" + version.name + "</div>")
+  $("#version-name").replaceWith("<div id='version-name' class='col-md-1'>" + version.name + "</div>")
   cleanOsIcons()
   for os in version.operating_systems
     if os.name == "Windows"
@@ -63,7 +63,7 @@ ajaxDeleteVersion = () ->
       alert("deleted")
 
 # Jquery :
-$ ->
+ready = () ->
   console.log("DOM is ready")
 
   if $(".show").length > 0
@@ -78,6 +78,14 @@ $ ->
   $(".show #select-version").change ->
     ajaxVersionDetails()
 
-  $('#destroy-version').click ->
+  $('.show #destroy-version').click ->
     ajaxDeleteVersion()
 
+  $('.show #edit-version').click ->
+    window.location.replace("/versions/" + $('#select-version').val() + "/edit")
+
+# Triggers :
+$ ->
+  ready()
+
+$(document).on('page:change', ready)

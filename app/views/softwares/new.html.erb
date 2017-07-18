@@ -1,10 +1,12 @@
-<div class="container-fluid text-center">
-  <div class="row content">
+<div class="container-fluid">
+
+  <%= link_to 'Back', softwares_path, class: "btn btn-primary" %>
+
+  <div class="row content text-center">
     <div class="col-sm-8 text-left">
 
       <h1>New Software</h1>
       <%= render 'form' %>
-      <%= link_to 'Back', softwares_path %>
 
     </div>
   </div>

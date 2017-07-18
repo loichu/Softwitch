@@ -2,6 +2,9 @@ class Software < ApplicationRecord
   belongs_to :editor
   has_many :versions, dependent: :destroy
 
+  # TODO:
+  # If no version: delete soft
+
   def check_compatibility
     linux = '0'
     windows = '0'

@@ -16,7 +16,7 @@
 
       <div class="btn-group isolated" role="group">
         <%= link_to 'Edit', edit_software_path(@software), class: "btn btn-default btn-xs" %>
-        <%= link_to 'Destroy',  @software,  method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs" %>
+        <%= link_to 'Delete',  @software,  method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs" %>
       </div>
     </div>
 
@@ -36,6 +36,16 @@
   <div class="version-header">
     <strong><%= @software.name %></strong>
     <div id="version-name"></div>
+
+    <div class="btn-group" role="group">
+      <%= link_to 'Edit', '#',
+                  class: "btn btn-default btn-xs",
+                  id: 'edit-version' %>
+
+      <%= link_to 'Delete', '#',
+                  class: "btn btn-danger btn-xs",
+                  id: 'destroy-version' %>
+    </div>
   </div>
 
   <div>
@@ -55,15 +65,7 @@
         -->
         <div class="version-details bs-callout bs-callout-info">
 
-          <div class="btn-group isolated" role="group">
-            <%= link_to 'Edit', '#',
-                        class: "btn btn-default btn-xs",
-                        id: 'edit-version' %>
 
-            <%= link_to 'Destroy', '#',
-                        class: "btn btn-danger btn-xs",
-                        id: 'destroy-version' %>
-          </div>
 
           <dl class="dl-horizontal">
             <dt>OS</dt>
