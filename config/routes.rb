@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :secrets
   get 'welcome/index'
 
   # This is for accessing software's versions

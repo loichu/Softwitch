@@ -3,7 +3,9 @@ class Version < ApplicationRecord
 
   has_and_belongs_to_many :tags
   has_and_belongs_to_many :operating_systems
-  has_and_belongs_to_many  :pcs
+
+  has_many :pcs, through: :installations
+  #has_and_belongs_to_many  :pcs
 
   after_save :update_software
   after_update :update_software
