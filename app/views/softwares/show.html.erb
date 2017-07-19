@@ -41,10 +41,18 @@
       <%= link_to 'Edit', '#',
                   class: "btn btn-default btn-xs",
                   id: 'edit-version' %>
-
+<!--
+      <%= link_to 'Delete', '#', method: :delete, confirm: 'Delete ?',
+                  class: "btn btn-danger btn-xs",
+                  id: 'destroy-version',
+                  'data-message' => 'Are you sure ?',
+                  'data-severity' => 'danger',
+                  :remote => true %>
+-->
       <%= link_to 'Delete', '#',
                   class: "btn btn-danger btn-xs",
                   id: 'destroy-version' %>
+
     </div>
   </div>
 

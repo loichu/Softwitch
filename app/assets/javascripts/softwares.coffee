@@ -51,6 +51,9 @@ populate = (version) ->
     $('#doc-link').attr("href", "#")
     $('#doc-link').addClass("disabled")
 
+confirmDelete = () ->
+  return confirm('Are you sure ?')
+
 ajaxDeleteVersion = () ->
   version_id = $("#select-version").val()
   # TODO:
@@ -79,7 +82,8 @@ ready = () ->
     ajaxVersionDetails()
 
   $('.show #destroy-version').click ->
-    ajaxDeleteVersion()
+    if confirmDelete()
+      console.log('okay')
 
   $('.show #edit-version').click ->
     window.location.replace("/versions/" + $('#select-version').val() + "/edit")
