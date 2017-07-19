@@ -20,6 +20,8 @@ gem 'font-awesome-rails'
 gem 'jquery-ui-rails'
 # Select2
 gem 'select2-rails'
+# React
+gem "react-rails"
 #---------------
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
