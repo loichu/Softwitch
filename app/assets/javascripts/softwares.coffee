@@ -81,9 +81,12 @@ ready = () ->
   $(".show #select-version").change ->
     ajaxVersionDetails()
 
-  $('.show #destroy-version').click ->
+  $('.show #destroy-version').click (event) ->
     if confirmDelete()
-      console.log('okay')
+      ajaxDeleteVersion()
+
+    event.stopPropagation()
+
 
   $('.show #edit-version').click ->
     window.location.replace("/versions/" + $('#select-version').val() + "/edit")
@@ -92,4 +95,4 @@ ready = () ->
 $ ->
   ready()
 
-$(document).on('page:change', ready)
+#$(document).on('page:change', ready)
