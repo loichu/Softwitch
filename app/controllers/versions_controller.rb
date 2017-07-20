@@ -4,7 +4,7 @@ class VersionsController < ApplicationController
   # GET /softwares/:software_id/versions
   # GET /softwares/:software_id/versions.json
   def index
-    @versions = Version.all
+    @versions = Version.where(:software_id => params[:software_id])
   end
 
   # GET /versions/1
