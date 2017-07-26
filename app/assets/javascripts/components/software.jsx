@@ -52,10 +52,10 @@ class Software extends React.Component{
             dlButton = undefined,
             docButton = undefined;
 
-        distrilogAvailability = currentVersion.distrilog ? "available" : "<b>not</b> available";
         releaseDate = currentVersion.date ? currentVersion.date : "not specified";
+        distrilogAvailability = currentVersion.distrilog ? "available" : "<b>not</b> available";
 
-        //console.log(currentVersion);
+        console.log(currentVersion);
 
         return <div className="container-fluid">
             <a className="btn btn-primary" href={links.back}>Back</a>
@@ -124,8 +124,8 @@ class Software extends React.Component{
             <div>
                 {/* Nav tabs */}
                 <ul className="nav nav-tabs" role="tablist">
-                    <li role="presentation"><a href="#details" aria-controls="details" aria-expanded="true" role="tab" data-toggle="tab">Details</a></li>
-                    <li role="presentation"><a href="#presentation" aria-controls="presentation" role="tab" data-toggle="tab">Presentation</a></li>
+                    <li role="presentation" className="active"><a id="tab-details" href="#details" aria-controls="details" role="tab" data-toggle="tab">Details</a></li>
+                    <li role="presentation"><a id="tab-description" href="#description" aria-controls="description" role="tab" data-toggle="tab">Description</a></li>
                 </ul>
 
                 {/*  Tab panes */}
@@ -135,9 +135,7 @@ class Software extends React.Component{
                             <dl className="dl-horizontal">
                                 <dt>OS</dt>
                                 <dd>
-                                    <i className='fa fa-windows os-icon' aria-hidden='true'></i>
-                                    <i className='fa fa-linux os-icon' aria-hidden='true'></i>
-                                    <i className='fa fa-apple os-icon' aria-hidden='true'></i>
+                                    <OsIcons os={this.state.currentVersion}/>
                                 </dd>
 
                                 <dt>Release date</dt>
@@ -158,7 +156,7 @@ class Software extends React.Component{
                         </div>
                     </div>
 
-                    <div role="tabpanel" className="tab-pane fade" id="presentation">
+                    <div role="tabpanel" className="tab-pane fade" id="description">
                         <h1>Presentation</h1>
                     </div>
                 </div>
@@ -199,5 +197,29 @@ class VersionSelect extends React.PureComponent{
         return <select className="form-control" id="select-version" onChange={this.changeHandler}>
             {versionOptions}
         </select>;
+    }
+}
+
+class OSIcons extends React.Component{
+    constructor(props)
+    {
+        super(props);
+    }
+    render () {
+        os = this.props.currentVersion;
+
+        <div>
+            {currentVersion.operating_systems.includes('windows') ?
+                <i className='fa fa-windows os-icon' aria-hidden='true'></i>
+                :null}
+            {currentVersion.operating_systems.includes('linux') ?
+                <i className='fa fa-linux os-icon' aria-hidden='true'></i>
+                :null
+            }
+            {currentVersion.operating_systems.includes('mac') ?
+                <i className='fa fa-apple os-icon' aria-hidden='true'></i>
+                :null
+            }
+        </div>
     }
 }
