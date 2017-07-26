@@ -104,7 +104,7 @@ class Software extends React.Component{
 
             <div className="version-header">
                 <strong>{ software.name }</strong>
-                <div id="version-name">{currentVersion.name}</div>
+                <div id="version-name" className="col-md-1">{currentVersion.name}</div>
 
                 <div className="btn-group" role="group">
                     <a className="btn btn-default btn-xs"
