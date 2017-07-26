@@ -1,28 +1,49 @@
-window.Software = React.createClass({
-    getInitialState () {
-        return {
-            currentVersion: undefined,
-            versions: []
-        }
-    },
-    componentDidMount() {
+class Software extends React.Component{
+    constructor(props) {
+        super(props);
+
+        this.state = {
+            versions: [],
+            currentVersion: ""
+        };
+
+        this.changeHandler = this.changeHandler.bind(this)
+    }
+    componentWillMount() {
         this.updateVersionsAjax();
-    },
+    }
+    // Request all software related versions
     updateVersionsAjax() {
         let software_id = this.props.software.id;
-        var self = this;
+        let self = this;
         $.ajax({
             method: "GET",
             url: "/softwares/" + software_id + "/versions.json",
             success(versions) {
                 self.setState({versions: versions});
+                self.setState({currentVersion: self.state.versions[0]});
+                console.log("Ajax success")
             }
         });
-    },
+    }
+    changeHandler(newVal) {
+        let versions = this.state.versions;
+        let currentVersion = versions.find((version) => {
+            return version.id.toString() === newVal;
+        });
+        this.setState({currentVersion: currentVersion});
+    }
     render() {
+        console.log("Render Software");
+
         let software = this.props.software,
             editor = this.props.editor,
-            links = this.props.links;
+            links = this.props.links,
+            versions = this.state.versions,
+            currentVersion = this.state.currentVersion;
+
+        console.log(currentVersion);
+
         return <div className="container-fluid">
             <a className="btn btn-primary" href={links.back}>Back</a>
             <h1>{ software.name }</h1>
@@ -44,7 +65,13 @@ window.Software = React.createClass({
 
             <div className="right-column">
                 <label className="control-label">Version : </label>
-                <Software.VersionSelect versions={this.state.versions} onChange={this.changeVersion}/>
+
+                <VersionSelect
+                    versions={versions}
+                    currentVersionId={currentVersion.id}
+                    onChange={this.changeHandler}
+                />
+
                 <br />
                 <a className="btn btn-large btn-primary isolated"
                    href={links.new_software_version}>New version</a>
@@ -53,7 +80,7 @@ window.Software = React.createClass({
 
             <div className="version-header">
                 <strong>{ software.name }</strong>
-                Version {this.state.currentVersion}
+                Version {currentVersion.name}
 
                 <div className="btn-group" role="group">
                     <a className="btn btn-default btn-xs" id="edit-version" href={links.edit_version}>Edit</a>
@@ -113,50 +140,37 @@ window.Software = React.createClass({
 
             </div>
         </div>;
-    },
-    changeVersion(newVal, oldVal) {
-        this.setState({currentVersion: newVal});
     }
-});
+}
 
+class VersionSelect extends React.PureComponent{
+    constructor (props) {
+        super(props);
 
-/*
- <%= select_tag :version, options_for_select(@versions.all.map{|v|[v.name, v.id]}),
- {class: "form-control",
- id: "select-version"} %>
+        this.state = {
+            value: this.props.currentVersionId
+        };
 
-
- */
-window.Software.VersionSelect = React.createClass({
-    getInitialState () {
-        return {
-            value: undefined
-        }
-    },
-    render: function() {
-        var versionOptions = this.props.versions.map(
-            version => <option key={version.id} value={version.id}>{version.name}</option>
-        );
-        return <select className="form-control" id="select-version">
-            {versionOptions}
-        </select>;
-    },
-    componentDidMount: function () {
+        this.changeHandler = this.changeHandler.bind(this);
+    }
+    componentDidMount () {
         this.mySelect = $(ReactDOM.findDOMNode(this));
         this.mySelect
             .select2({theme: "bootstrap"})
-            .on('change', this.onChange);
-    },
-    componentDidUpdate() {
-        this.onChange();
-    },
-    onChange: function() {
-        var newVal = this.mySelect.val();
-
-        if (this.props.onChange) {
-            this.props.onChange(newVal, this.oldValue);
-        }
-        this.oldValue = newVal;
+            .on('change', this.changeHandler);
+        //console.log(this.props);
     }
-
-});
+    changeHandler(event) {
+        this.setState({value: event.target.value});
+        this.props.onChange(this.state.value.toString());
+    }
+    render () {
+        console.log("Render VersionSelect");
+        let versionOptions = this.props.versions.map(
+            version => <option key={version.id} value={version.id}>{version.name}</option>
+        );
+        return <select className="form-control" id="select-version" onChange={this.changeHandler}>
+            {versionOptions}
+        </select>;
+    }
+}

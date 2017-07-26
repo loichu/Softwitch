@@ -93,6 +93,6 @@ ready = () ->
 
 # Triggers :
 $ ->
-  ready()
+  #ready()
 
 #$(document).on('page:change', ready)
