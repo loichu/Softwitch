@@ -22,7 +22,7 @@ class Software extends React.Component{
             success(versions) {
                 self.setState({versions: versions});
                 self.setState({currentVersion: self.state.versions[0]});
-                console.log("Ajax success")
+                //console.log("Ajax success")
             }
         });
     }
@@ -34,57 +34,90 @@ class Software extends React.Component{
         this.setState({currentVersion: currentVersion});
     }
     render() {
-        console.log("Render Software");
+        //console.log("Render Software");
 
+        // Props
         let software = this.props.software,
-            editor = this.props.editor,
-            links = this.props.links,
+            editor = this.props.editor;
+
+        // States
+        let links = this.props.links,
             versions = this.state.versions,
             currentVersion = this.state.currentVersion;
 
-        console.log(currentVersion);
+        // HTML elements
+        let OsIcons = undefined,
+            distrilogAvailability = undefined,
+            releaseDate = undefined,
+            dlButton = undefined,
+            docButton = undefined;
+
+        distrilogAvailability = currentVersion.distrilog ? "available" : "<b>not</b> available";
+        releaseDate = currentVersion.date ? currentVersion.date : "not specified";
+
+        //console.log(currentVersion);
 
         return <div className="container-fluid">
             <a className="btn btn-primary" href={links.back}>Back</a>
+
             <h1>{ software.name }</h1>
+
             <div className="show-header">
                 <div className="software-details">
                     <b>Editor : </b>
                     { editor.name }<br />
+
                     <b>Short description :</b>
                     { software.short_desc }
+
                     <br />
+
                     <div className="btn-group isolated" role="group">
                         <a className="btn btn-default btn-xs" href={links.edit_soft}>Edit</a>
                         <a className="btn btn-danger btn-xs"
-                           data-method="delete" data-confirm="Are you sure?" rel="nofollow"
+                           data-method="delete" data-confirm="You're about to delete this program. Are you sure ?" rel="nofollow"
                            href={links.delete_soft}>Delete</a>
                     </div>
                 </div>
+
+
+                <div className="right-column">
+                    <label className="control-label">Version : </label>
+
+                    <VersionSelect
+                        id="select-version"
+                        className="form-control"
+                        versions={versions}
+                        currentVersionId={currentVersion.id}
+                        onChange={this.changeHandler}
+                    />
+
+                    <br />
+
+                    <a className="btn btn-large btn-primary isolated"
+                       href={links.new_software_version}>New version
+                    </a>
+                </div>
             </div>
 
-            <div className="right-column">
-                <label className="control-label">Version : </label>
-
-                <VersionSelect
-                    versions={versions}
-                    currentVersionId={currentVersion.id}
-                    onChange={this.changeHandler}
-                />
-
-                <br />
-                <a className="btn btn-large btn-primary isolated"
-                   href={links.new_software_version}>New version</a>
-            </div>
             <hr />
 
             <div className="version-header">
                 <strong>{ software.name }</strong>
-                Version {currentVersion.name}
+                <div id="version-name">{currentVersion.name}</div>
 
                 <div className="btn-group" role="group">
-                    <a className="btn btn-default btn-xs" id="edit-version" href={links.edit_version}>Edit</a>
-                    <a className="btn btn-danger btn-xs" id="destroy-version" href="#">Delete</a>
+                    <a className="btn btn-default btn-xs"
+                       id="edit-version"
+                       href={"/versions/" + currentVersion.id + "/edit"}>
+                        Edit
+                    </a>
+                    <a className="btn btn-danger btn-xs"
+                       id="destroy-version"
+                       data-method="delete" data-confirm="You're about to delete this version. Are you sure ?"
+                       href={"/versions/" + currentVersion.id}>
+                        Delete
+                    </a>
                 </div>
             </div>
 
@@ -98,31 +131,23 @@ class Software extends React.Component{
                 {/*  Tab panes */}
                 <div className="tab-content" id="version-desc">
                     <div role="tabpanel" className="tab-pane fade active" id="details">
-                        {/*
-                        /!\
-                        All fields in this area are filled with JQuery (AJAX)
-                        See assets/javascript/softwares.coffee
-                        */}
                         <div className="version-details bs-callout bs-callout-info">
-
-
-
                             <dl className="dl-horizontal">
                                 <dt>OS</dt>
                                 <dd>
-                                    <div id="version-os-windows" className="os-icon"/>
-                                    <div id="version-os-linux" className="os-icon"/>
-                                    <div id="version-os-apple" className="os-icon"/>
+                                    <i className='fa fa-windows os-icon' aria-hidden='true'></i>
+                                    <i className='fa fa-linux os-icon' aria-hidden='true'></i>
+                                    <i className='fa fa-apple os-icon' aria-hidden='true'></i>
                                 </dd>
 
                                 <dt>Release date</dt>
                                 <dd>
-                                    <div id="version-date"/>
+                                    <div id="version-date" className="col-md-3">{releaseDate}</div>
                                 </dd>
 
                                 <dt>Distrilog</dt>
                                 <dd>
-                                    <div id="version-distrilog"/>
+                                    <div id="version-distrilog" className="col-md-3" dangerouslySetInnerHTML={{__html: distrilogAvailability}}></div>
                                 </dd>
                             </dl>
 
@@ -165,10 +190,12 @@ class VersionSelect extends React.PureComponent{
         this.props.onChange(this.state.value.toString());
     }
     render () {
-        console.log("Render VersionSelect");
+        //console.log("Render VersionSelect");
+
         let versionOptions = this.props.versions.map(
             version => <option key={version.id} value={version.id}>{version.name}</option>
         );
+
         return <select className="form-control" id="select-version" onChange={this.changeHandler}>
             {versionOptions}
         </select>;

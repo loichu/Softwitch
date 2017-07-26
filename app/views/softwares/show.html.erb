@@ -1,11 +1,12 @@
-<%= react_component("Software", {
+<%=
+  react_component("Software", {
     software: @software,
     editor: @software.editor,
     links: {
         back: softwares_path,
         edit_soft: edit_software_path(@software),
         delete_soft: software_path(@software),
-        edit_version: "TODO", # edit_version_path(@version),
-        new_software_version: new_software_version_path(software_id: @software.id),
-     },
-}) %>
+        new_software_version: new_software_version_path(software_id: @software.id)
+     }
+  })
+%>
