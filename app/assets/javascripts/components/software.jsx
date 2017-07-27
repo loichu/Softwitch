@@ -4,13 +4,23 @@ class Software extends React.Component{
 
         this.state = {
             versions: [],
-            currentVersion: ""
+            currentVersion: "",
+            tabs: [
+                {name: 'Details'},
+                {name: 'Description'}
+            ],
+            activeTab: ""
         };
 
-        this.changeHandler = this.changeHandler.bind(this)
+        this.handleChange = this.handleChange.bind(this);
+        this.changeTab = this.changeTab.bind(this);
     }
     componentWillMount() {
         this.updateVersionsAjax();
+        if(this.state.activeTab === ""){
+            console.log("Set activeTab to Details");
+            this.setState({activeTab: this.state.tabs[0]});
+        }
     }
     // Request all software related versions
     updateVersionsAjax() {
@@ -26,12 +36,16 @@ class Software extends React.Component{
             }
         });
     }
-    changeHandler(newVal) {
-        let versions = this.state.versions;
-        let currentVersion = versions.find((version) => {
-            return version.id.toString() === newVal;
-        });
+    handleChange(event) {
+        let versions = this.state.versions,
+            newVal = event.target.value,
+            currentVersion = versions.find((version) => {
+                return version.id.toString() === newVal;
+            });
         this.setState({currentVersion: currentVersion});
+    }
+    changeTab(tab) {
+        this.setState({activeTab: tab});
     }
     render() {
         //console.log("Render Software");
@@ -41,151 +55,124 @@ class Software extends React.Component{
             editor = this.props.editor;
 
         // States
-        let links = this.props.links,
-            versions = this.state.versions,
-            currentVersion = this.state.currentVersion;
+        let links          = this.props.links,
+            versions       = this.state.versions,
+            currentVersion = this.state.currentVersion,
+            tabs           = this.state.tabs,
+            activeTab      = this.state.activeTab;
 
-        // HTML elements
+
+        // => DetailsTab
         let OsIcons = undefined,
             distrilogAvailability = undefined,
             releaseDate = undefined,
             dlButton = undefined,
             docButton = undefined;
 
-        releaseDate = currentVersion.date ? currentVersion.date : "not specified";
-        distrilogAvailability = currentVersion.distrilog ? "available" : "<b>not</b> available";
+
 
         console.log(currentVersion);
 
-        return <div className="container-fluid">
-            <a className="btn btn-primary" href={links.back}>Back</a>
+        return (
+            <div className="container-fluid">
+                <a className="btn btn-primary" href={links.back}>Back</a>
 
-            <h1>{ software.name }</h1>
+                <h1>{ software.name }</h1>
 
-            <div className="show-header">
-                <div className="software-details">
-                    <b>Editor : </b>
-                    { editor.name }<br />
+                <div className="show-header">
+                    <div className="software-details">
+                        <b>Editor : </b>
+                        { editor.name }<br />
 
-                    <b>Short description :</b>
-                    { software.short_desc }
+                        <b>Short description :</b>
+                        { software.short_desc }
 
-                    <br />
+                        <br />
 
-                    <div className="btn-group isolated" role="group">
-                        <a className="btn btn-default btn-xs" href={links.edit_soft}>Edit</a>
-                        <a className="btn btn-danger btn-xs"
-                           data-method="delete" data-confirm="You're about to delete this program. Are you sure ?" rel="nofollow"
-                           href={links.delete_soft}>Delete</a>
-                    </div>
-                </div>
-
-
-                <div className="right-column">
-                    <label className="control-label">Version : </label>
-
-                    <VersionSelect
-                        id="select-version"
-                        className="form-control"
-                        versions={versions}
-                        currentVersionId={currentVersion.id}
-                        onChange={this.changeHandler}
-                    />
-
-                    <br />
-
-                    <a className="btn btn-large btn-primary isolated"
-                       href={links.new_software_version}>New version
-                    </a>
-                </div>
-            </div>
-
-            <hr />
-
-            <div className="version-header">
-                <strong>{ software.name }</strong>
-                <div id="version-name" className="col-md-1">{currentVersion.name}</div>
-
-                <div className="btn-group" role="group">
-                    <a className="btn btn-default btn-xs"
-                       id="edit-version"
-                       href={"/versions/" + currentVersion.id + "/edit"}>
-                        Edit
-                    </a>
-                    <a className="btn btn-danger btn-xs"
-                       id="destroy-version"
-                       data-method="delete" data-confirm="You're about to delete this version. Are you sure ?"
-                       href={"/versions/" + currentVersion.id}>
-                        Delete
-                    </a>
-                </div>
-            </div>
-
-            <div>
-                {/* Nav tabs */}
-                <ul className="nav nav-tabs" role="tablist">
-                    <li role="presentation" className="active"><a id="tab-details" href="#details" aria-controls="details" role="tab" data-toggle="tab">Details</a></li>
-                    <li role="presentation"><a id="tab-description" href="#description" aria-controls="description" role="tab" data-toggle="tab">Description</a></li>
-                </ul>
-
-                {/*  Tab panes */}
-                <div className="tab-content" id="version-desc">
-                    <div role="tabpanel" className="tab-pane fade active" id="details">
-                        <div className="version-details bs-callout bs-callout-info">
-                            <dl className="dl-horizontal">
-                                <dt>OS</dt>
-                                <dd>
-                                    <OsIcons os={this.state.currentVersion}/>
-                                </dd>
-
-                                <dt>Release date</dt>
-                                <dd>
-                                    <div id="version-date" className="col-md-3">{releaseDate}</div>
-                                </dd>
-
-                                <dt>Distrilog</dt>
-                                <dd>
-                                    <div id="version-distrilog" className="col-md-3" dangerouslySetInnerHTML={{__html: distrilogAvailability}}></div>
-                                </dd>
-                            </dl>
-
-                            <div className="link-buttons">
-                                <a href="#" target="_blank" id="dl-link" className="btn btn-sm btn-primary external-link">Download</a>
-                                <a href="#" target="_blank" id="doc-link" className="btn btn-sm btn-primary external-link">Visit website</a>
-                            </div>
+                        <div className="btn-group isolated" role="group">
+                            <a className="btn btn-default btn-xs" href={links.edit_soft}>Edit</a>
+                            <a className="btn btn-danger btn-xs"
+                               data-method="delete" data-confirm="You're about to delete this program. Are you sure ?" rel="nofollow"
+                               href={links.delete_soft}>Delete</a>
                         </div>
                     </div>
 
-                    <div role="tabpanel" className="tab-pane fade" id="description">
-                        <h1>Presentation</h1>
+
+                    <div className="right-column">
+                        <label className="control-label">Version : </label>
+
+                        <VersionSelect
+                            id="select-version"
+                            className="form-control"
+                            versions={versions}
+                            currentVersionId={currentVersion.id}
+                            onChange={this.handleChange}
+                        />
+
+                        <br />
+
+                        <a className="btn btn-large btn-primary isolated"
+                           href={links.new_software_version}>New version
+                        </a>
                     </div>
                 </div>
 
+                <hr />
+
+                <div className="version-header">
+                    <strong>{ software.name }</strong>
+                    <div id="version-name" className="col-md-1">{currentVersion.name}</div>
+
+                    <div className="btn-group" role="group">
+                        <a className="btn btn-default btn-xs"
+                           id="edit-version"
+                           href={"/versions/" + currentVersion.id + "/edit"}>
+                            Edit
+                        </a>
+                        <a className="btn btn-danger btn-xs"
+                           id="destroy-version"
+                           data-method="delete" data-confirm="You're about to delete this version. Are you sure ?"
+                           href={"/versions/" + currentVersion.id}>
+                            Delete
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    {/* Nav tabs
+                    <ul className="nav nav-tabs" role="tablist">
+                        <li role="presentation" className="active"><a id="tab-details" href="#details" aria-controls="details" role="tab" data-toggle="tab">Details</a></li>
+                        <li role="presentation"><a id="tab-description" href="#description" aria-controls="description" role="tab" data-toggle="tab">Description</a></li>
+                    </ul>*/}
+
+                    <Tabs activeTab={activeTab} changeTab={this.changeTab} tabs={tabs} />
+
+                    {/*  Tab panes
+                    <div className="tab-content" id="version-desc">*/}
+                        {activeTab.name == "Details" ?
+                            <DetailsTab currentVersion={currentVersion}/>
+                        :null}
+                        {activeTab.name == "Description" ?
+                            <DescriptionTab />
+                        :null}
+                    {/*</div>*/}
+
+                </div>
             </div>
-        </div>;
+        );
     }
 }
 
 class VersionSelect extends React.PureComponent{
     constructor (props) {
         super(props);
-
-        this.state = {
-            value: this.props.currentVersionId
-        };
-
-        this.changeHandler = this.changeHandler.bind(this);
     }
     componentDidMount () {
         this.mySelect = $(ReactDOM.findDOMNode(this));
         this.mySelect
             .select2({theme: "bootstrap"})
-            .on('change', this.changeHandler);
+            .on('change', this.props.onChange);
         //console.log(this.props);
-    }
-    changeHandler(event) {
-        this.setState({value: event.target.value});
-        this.props.onChange(this.state.value.toString());
     }
     render () {
         //console.log("Render VersionSelect");
@@ -194,29 +181,139 @@ class VersionSelect extends React.PureComponent{
             version => <option key={version.id} value={version.id}>{version.name}</option>
         );
 
-        return <select className="form-control" id="select-version" onChange={this.changeHandler}>
+        return (
+        <select className="form-control" id="select-version" onChange={this.props.onChange}>
             {versionOptions}
-        </select>;
+        </select>
+        );
+    }
+}
+
+class Tab extends React.Component{
+    constructor (props)
+    {
+        super(props);
+    }
+    render ()
+    {
+        let isActive = this.props.isActive,
+            data = this.props.data;
+        return (
+            <li key={data.name} onClick={this.props.handleClick} className={isActive ? "active" : null}>
+                <a href="#">{data.name}</a>
+            </li>
+        );
+    }
+}
+
+class Tabs extends React.Component{
+    constructor (props)
+    {
+        super(props);
+    }
+    renderTab (tab)
+    {
+        let activeTab = this.props.activeTab;
+
+        return <Tab data={tab} isActive={activeTab == tab} handleClick={this.props.changeTab.bind(this, tab)} />
+    }
+    render ()
+    {
+        let tabs = this.props.tabs;
+
+        return (
+            <ul className="nav nav-tabs">
+                {tabs.map(tab => this.renderTab(tab))}
+            </ul>
+        );
+    }
+}
+
+class DetailsTab extends React.Component{
+    constructor (props)
+    {
+        super(props);
+    }
+    render()
+    {
+        // Get current version
+        let currentVersion = this.props.currentVersion;
+
+        // Get details
+        let releaseDate = currentVersion.date ? currentVersion.date : "not specified",
+            distrilogAvailability = currentVersion.distrilog ? "available" : "<b>not</b> available";
+
+        return (
+            <div role="tabpanel" className="tab-pane active" id="details">
+                <div className="version-details bs-callout bs-callout-info">
+                    <dl className="dl-horizontal">
+                        <dt>OS</dt>
+                        <dd>
+                            <OSIcons currentVersion={currentVersion}/>
+                        </dd>
+
+                        <dt>Release date</dt>
+                        <dd>
+                            <div id="version-date" className="col-md-3">{releaseDate}</div>
+                        </dd>
+
+                        <dt>Distrilog</dt>
+                        <dd>
+                            <div id="version-distrilog" className="col-md-3" dangerouslySetInnerHTML={{__html: distrilogAvailability}}></div>
+                        </dd>
+                    </dl>
+
+                    <div className="link-buttons">
+                        <a href="#" target="_blank" id="dl-link" className="btn btn-sm btn-primary external-link">Download</a>
+                        <a href="#" target="_blank" id="doc-link" className="btn btn-sm btn-primary external-link">Visit website</a>
+                    </div>
+                </div>
+            </div>
+        );
+    }
+}
+
+class DescriptionTab extends React.Component{
+    constructor (props)
+    {
+        super(props);
+    }
+    render ()
+    {
+        return <div role="tabpanel" className="tab-pane" id="description">
+            <h1>Description</h1>
+        </div>
     }
 }
 
 class OSIcons extends React.Component{
-    constructor(props)
+    constructor (props)
     {
         super(props);
     }
+    isCompatible (osSoft, osTested)
+    {
+        var compatible = false;
+        for(let os of osSoft) {
+            if(os = osTested){
+                compatible = true;
+            }
+        }
+        return compatible;
+    }
     render () {
-        os = this.props.currentVersion;
+        let currentVersion = this.props.currentVersion,
+            os             = currentVersion.operating_systems ? currentVersion.operating_systems : [];
 
-        <div>
-            {currentVersion.operating_systems.includes('windows') ?
+        return <div>
+            {this.isCompatible(os, 'Windows') ?
                 <i className='fa fa-windows os-icon' aria-hidden='true'></i>
                 :null}
-            {currentVersion.operating_systems.includes('linux') ?
+            {this.isCompatible(os, 'Linux') ?
                 <i className='fa fa-linux os-icon' aria-hidden='true'></i>
                 :null
             }
-            {currentVersion.operating_systems.includes('mac') ?
+            {this.isCompatible(os, 'Mac') ?
                 <i className='fa fa-apple os-icon' aria-hidden='true'></i>
                 :null
             }
