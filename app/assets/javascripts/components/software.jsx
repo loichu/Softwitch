@@ -45,6 +45,7 @@ class Software extends React.Component{
         this.setState({currentVersion: currentVersion});
     }
     changeTab(tab) {
+        //console.log({tab});
         this.setState({activeTab: tab});
     }
     render() {
@@ -139,24 +140,17 @@ class Software extends React.Component{
                 </div>
 
                 <div>
-                    {/* Nav tabs
-                    <ul className="nav nav-tabs" role="tablist">
-                        <li role="presentation" className="active"><a id="tab-details" href="#details" aria-controls="details" role="tab" data-toggle="tab">Details</a></li>
-                        <li role="presentation"><a id="tab-description" href="#description" aria-controls="description" role="tab" data-toggle="tab">Description</a></li>
-                    </ul>*/}
-
+                    {/* Nav tabs*/}
                     <Tabs activeTab={activeTab} changeTab={this.changeTab} tabs={tabs} />
 
-                    {/*  Tab panes
-                    <div className="tab-content" id="version-desc">*/}
-                        {activeTab.name == "Details" ?
-                            <DetailsTab currentVersion={currentVersion}/>
-                        :null}
-                        {activeTab.name == "Description" ?
-                            <DescriptionTab />
-                        :null}
-                    {/*</div>*/}
+                    {/*  Tab panes*/}
+                    {activeTab.name === "Details" ?
+                        <DetailsTab currentVersion={currentVersion}/>
+                    :null}
 
+                    {activeTab.name === "Description" ?
+                        <DescriptionTab />
+                    :null}
                 </div>
             </div>
         );
@@ -194,13 +188,17 @@ class Tab extends React.Component{
     {
         super(props);
     }
+    dontRedirect (event)
+    {
+        event.preventDefault();
+    }
     render ()
     {
         let isActive = this.props.isActive,
-            data = this.props.data;
+            data     = this.props.data;
         return (
             <li key={data.name} onClick={this.props.handleClick} className={isActive ? "active" : null}>
-                <a href="#">{data.name}</a>
+                <a href={"#" + data.name} onClick={this.dontRedirect.bind(this)}>{data.name}</a>
             </li>
         );
     }
@@ -240,11 +238,12 @@ class DetailsTab extends React.Component{
         let currentVersion = this.props.currentVersion;
 
         // Get details
-        let releaseDate = currentVersion.date ? currentVersion.date : "not specified",
-            distrilogAvailability = currentVersion.distrilog ? "available" : "<b>not</b> available";
+        let releaseDate           = currentVersion.date ? currentVersion.date : "not specified",
+            distrilogAvailability = currentVersion.distrilog ? "available" : "<b>not</b> available",
+            dlLink                = currentVersion.install_link ? currentVersion.install_link : "#";
 
         return (
-            <div role="tabpanel" className="tab-pane active" id="details">
+            <div role="presentation" className="active" id="details">
                 <div className="version-details bs-callout bs-callout-info">
                     <dl className="dl-horizontal">
                         <dt>OS</dt>
@@ -280,7 +279,7 @@ class DescriptionTab extends React.Component{
     }
     render ()
     {
-        return <div role="tabpanel" className="tab-pane" id="description">
+        return <div role="presentation" className="" id="description">
             <h1>Description</h1>
         </div>
     }
@@ -293,7 +292,7 @@ class OSIcons extends React.Component{
     }
     isCompatible (osSoft, osTested)
     {
-        var compatible = false;
+        let compatible = false;
         for(let os of osSoft) {
             if(os = osTested){
                 compatible = true;
