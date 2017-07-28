@@ -18,7 +18,6 @@ class Software extends React.Component{
     componentWillMount() {
         this.updateVersionsAjax();
         if(this.state.activeTab === ""){
-            console.log("Set activeTab to Details");
             this.setState({activeTab: this.state.tabs[0]});
         }
     }
@@ -62,17 +61,7 @@ class Software extends React.Component{
             tabs           = this.state.tabs,
             activeTab      = this.state.activeTab;
 
-
-        // => DetailsTab
-        let OsIcons = undefined,
-            distrilogAvailability = undefined,
-            releaseDate = undefined,
-            dlButton = undefined,
-            docButton = undefined;
-
-
-
-        console.log(currentVersion);
+        //console.log(currentVersion);
 
         return (
             <div className="container-fluid">
@@ -157,7 +146,7 @@ class Software extends React.Component{
     }
 }
 
-class VersionSelect extends React.PureComponent{
+class VersionSelect extends React.PureComponent {
     constructor (props) {
         super(props);
     }
@@ -183,11 +172,7 @@ class VersionSelect extends React.PureComponent{
     }
 }
 
-class Tab extends React.Component{
-    constructor (props)
-    {
-        super(props);
-    }
+class Tab extends React.Component {
     dontRedirect (event)
     {
         event.preventDefault();
@@ -204,11 +189,7 @@ class Tab extends React.Component{
     }
 }
 
-class Tabs extends React.Component{
-    constructor (props)
-    {
-        super(props);
-    }
+class Tabs extends React.Component {
     renderTab (tab)
     {
         let activeTab = this.props.activeTab;
@@ -227,11 +208,7 @@ class Tabs extends React.Component{
     }
 }
 
-class DetailsTab extends React.Component{
-    constructor (props)
-    {
-        super(props);
-    }
+class DetailsTab extends React.Component {
     render()
     {
         // Get current version
@@ -240,7 +217,8 @@ class DetailsTab extends React.Component{
         // Get details
         let releaseDate           = currentVersion.date ? currentVersion.date : "not specified",
             distrilogAvailability = currentVersion.distrilog ? "available" : "<b>not</b> available",
-            dlLink                = currentVersion.install_link ? currentVersion.install_link : "#";
+            dlLink                = currentVersion.install_link ? currentVersion.install_link : "",
+            docLink               = currentVersion.website ? currentVersion.website : "";
 
         return (
             <div role="presentation" className="active" id="details">
@@ -263,8 +241,27 @@ class DetailsTab extends React.Component{
                     </dl>
 
                     <div className="link-buttons">
-                        <a href="#" target="_blank" id="dl-link" className="btn btn-sm btn-primary external-link">Download</a>
-                        <a href="#" target="_blank" id="doc-link" className="btn btn-sm btn-primary external-link">Visit website</a>
+                        {/*<a href="#" target="_blank" id="dl-link" className="btn btn-sm btn-primary external-link">Download</a>*/}
+                        <Button
+                            id="dl-link"
+                            className="external-link"
+                            href={dlLink}
+                            openInNewTab="true"
+                            color="primary"
+                            text="Download"
+                            size="sm"
+                        />
+
+                        <Button
+                            id="doc-link"
+                            className="external-link"
+                            href={docLink}
+                            openInNewTab="true"
+                            color="primary"
+                            text="Visit website"
+                            size="sm"
+                        />
+                        {/*<a href="#" target="_blank" id="doc-link" className="btn btn-sm btn-primary external-link">Visit website</a>*/}
                     </div>
                 </div>
             </div>
@@ -272,24 +269,63 @@ class DetailsTab extends React.Component{
     }
 }
 
-class DescriptionTab extends React.Component{
-    constructor (props)
-    {
-        super(props);
+class Button extends React.Component {
+    openLink () {
+        let target = this.props.openInNewTab ? "_blank" : "_self",
+            href   = this.props.href;
+
+        window.open(href, target);
     }
     render ()
     {
-        return <div role="presentation" className="" id="description">
-            <h1>Description</h1>
-        </div>
+        // Get props in variables
+        let href      = this.props.href,
+            size      = this.props.size,
+            color     = this.props.color,
+            className = this.props.className,
+            id        = this.props.id,
+            text      = this.props.text,
+            disabled  = !href;
+
+        // Make actual classes
+        let classes = `btn btn-${color} ${size ? "btn-" + size : ""} ${className}`;
+
+        return (
+            <button
+                id={id}
+                className={classes}
+                onClick={(href ? this.openLink.bind(this) :
+                    (this.props.onClick ? this.props.onClick :
+                        ""))}
+                disabled={disabled}
+            >{text}</button>
+        );
     }
 }
 
-class OSIcons extends React.Component{
-    constructor (props)
+Button.defaultProps = {
+    onClick: "",
+    href: "",
+    size: "",
+    color: "default",
+    className: "",
+    id: "",
+    openInNewTab: false,
+    text: ""
+};
+
+class DescriptionTab extends React.Component {
+    render ()
     {
-        super(props);
+        return(
+            <div role="presentation" className="" id="description">
+                <h1>Description</h1>
+            </div>
+        );
     }
+}
+
+class OSIcons extends React.Component {
     isCompatible (osSoft, osTested)
     {
         let compatible = false;
@@ -304,18 +340,20 @@ class OSIcons extends React.Component{
         let currentVersion = this.props.currentVersion,
             os             = currentVersion.operating_systems ? currentVersion.operating_systems : [];
 
-        return <div>
-            {this.isCompatible(os, 'Windows') ?
-                <i className='fa fa-windows os-icon' aria-hidden='true'></i>
+        return (
+            <div>
+                {this.isCompatible(os, 'Windows') ?
+                    <i className='fa fa-windows os-icon' aria-hidden='true'></i>
                 :null}
-            {this.isCompatible(os, 'Linux') ?
-                <i className='fa fa-linux os-icon' aria-hidden='true'></i>
-                :null
-            }
-            {this.isCompatible(os, 'Mac') ?
-                <i className='fa fa-apple os-icon' aria-hidden='true'></i>
-                :null
-            }
-        </div>
+
+                {this.isCompatible(os, 'Linux') ?
+                    <i className='fa fa-linux os-icon' aria-hidden='true'></i>
+                :null}
+
+                {this.isCompatible(os, 'Mac') ?
+                    <i className='fa fa-apple os-icon' aria-hidden='true'></i>
+                :null}
+            </div>
+        );
     }
 }
