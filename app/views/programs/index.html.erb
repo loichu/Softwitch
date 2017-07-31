@@ -1,11 +1,11 @@
 <div class="container-fluid text-center">
   <div class="row content">
 
-      <h1>Listing softwares</h1>
+      <h1>Listing programs</h1>
       <p id="error"><%= flash[:error] %></p>
 
       <div class="list-toolbar">
-        <%= link_to 'New Software', new_software_path, :class => 'btn btn-large btn-primary' %>
+        <%= link_to 'New Program', new_program_path, :class => 'btn btn-large btn-primary' %>
       </div>
 
   </div>
@@ -17,19 +17,19 @@
   <div class="list">
 
     <div class="row margin-0 list-header hidden-sm hidden-xs" style="padding: inherit">
-      <div class="col-md-3"><div class="header">Software</div></div>
+      <div class="col-md-3"><div class="header">Program</div></div>
       <div class="col-md-2"><div class="header">Editor</div></div>
       <div class="col-md-2"><div class="header">OS</div></div>
       <div class="col-md-5"><div class="header">Description</div></div>
     </div>
 
-    <% @softwares.each do |software| %>
-        <div class="row margin-0" onclick="location.href='<%= software_path(software) %>';" style="cursor: pointer;">
+    <% @programs.each do |program| %>
+        <div class="row margin-0" onclick="location.href='<%= program_path(program) %>';" style="cursor: pointer;">
 
           <div class="col-md-3">
             <div class="cell">
-              <div class="software">
-                <%= software.name %>
+              <div class="program">
+                <%= program.name %>
               </div>
             </div>
           </div>
@@ -37,7 +37,7 @@
           <div class="col-md-2">
             <div class="cell">
               <div class="editor">
-                <%= software.editor.name %>
+                <%= program.editor.name %>
               </div>
             </div>
           </div>
@@ -45,13 +45,13 @@
           <div class="col-md-2">
             <div class="cell">
               <div class="os">
-                <% if software.compatibility[0] == '1' %>
+                <% if program.compatibility[0] == '1' %>
                   <i class="fa fa-linux" aria-hidden="true"></i>
                 <% end %>
-                <% if software.compatibility[1] == '1' %>
+                <% if program.compatibility[1] == '1' %>
                   <i class="fa fa-windows" aria-hidden="true"></i>
                 <% end %>
-                <% if software.compatibility[2] == '1' %>
+                <% if program.compatibility[2] == '1' %>
                   <i class="fa fa-apple" aria-hidden="true"></i>
                 <% end %>
               </div>
@@ -61,7 +61,7 @@
           <div class="col-md-5">
             <div class="cell">
               <div class="description">
-                <%= software.short_desc %>
+                <%= program.short_desc %>
               </div>
             </div>
           </div>

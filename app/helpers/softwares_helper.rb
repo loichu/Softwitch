@@ -1,4 +1,4 @@
-module SoftwaresHelper
+module ProgramsHelper
   # Linux Windows Mac
   #  0      0      0
 

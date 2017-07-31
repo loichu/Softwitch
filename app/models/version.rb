@@ -1,12 +1,12 @@
 class Version < ApplicationRecord
-  belongs_to :software
+  belongs_to :program
 
   has_and_belongs_to_many :tags
   has_and_belongs_to_many :operating_systems
   has_and_belongs_to_many  :pcs
 
-  after_save :update_software
-  after_update :update_software
+  after_save :update_program
+  after_update :update_program
 
   def check_linux(compat)
     (compat.include? 'Linux') ? '1' : '0'
@@ -35,8 +35,8 @@ class Version < ApplicationRecord
     compat_os
   end
 
-  def update_software
-    @software = Software.find(self.software.id)
-    @software.check_compatibility
+  def update_program
+    @program = Program.find(self.program.id)
+    @program.check_compatibility
   end
 end
