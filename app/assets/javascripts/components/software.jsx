@@ -80,10 +80,21 @@ class Software extends React.Component{
                         <br />
 
                         <div className="btn-group isolated" role="group">
-                            <a className="btn btn-default btn-xs" href={links.edit_soft}>Edit</a>
+                            <Button
+                                className="btn btn-default btn-xs"
+                                href={links.edit_soft}
+                                text="Edit"
+                            />
+
+                            <Button
+                                className="btn btn-danger btn-xs"
+                                href={links.delete_soft}
+                                text="Delete"
+                            />
+                            {/* <a className="btn btn-default btn-xs" href={links.edit_soft}>Edit</a>
                             <a className="btn btn-danger btn-xs"
                                data-method="delete" data-confirm="You're about to delete this program. Are you sure ?" rel="nofollow"
-                               href={links.delete_soft}>Delete</a>
+                               href={links.delete_soft}>Delete</a>*/}
                         </div>
                     </div>
 
@@ -114,7 +125,20 @@ class Software extends React.Component{
                     <div id="version-name" className="col-md-1">{currentVersion.name}</div>
 
                     <div className="btn-group" role="group">
-                        <a className="btn btn-default btn-xs"
+                        <Button
+                            id="edit-version"
+                            className="btn btn-default btn-xs"
+                            href={"/versions/" + currentVersion.id + "/edit"}
+                            text="Edit"
+                        />
+
+                        <Button
+                            id="edit-version"
+                            className="btn btn-danger btn-xs"
+                            href={"/versions/" + currentVersion.id}
+                            text="Delete"
+                        />
+                        {/*<a className="btn btn-default btn-xs"
                            id="edit-version"
                            href={"/versions/" + currentVersion.id + "/edit"}>
                             Edit
@@ -124,7 +148,7 @@ class Software extends React.Component{
                            data-method="delete" data-confirm="You're about to delete this version. Are you sure ?"
                            href={"/versions/" + currentVersion.id}>
                             Delete
-                        </a>
+                        </a>*/}
                     </div>
                 </div>
 
@@ -241,7 +265,6 @@ class DetailsTab extends React.Component {
                     </dl>
 
                     <div className="link-buttons">
-                        {/*<a href="#" target="_blank" id="dl-link" className="btn btn-sm btn-primary external-link">Download</a>*/}
                         <Button
                             id="dl-link"
                             className="external-link"
@@ -261,7 +284,6 @@ class DetailsTab extends React.Component {
                             text="Visit website"
                             size="sm"
                         />
-                        {/*<a href="#" target="_blank" id="doc-link" className="btn btn-sm btn-primary external-link">Visit website</a>*/}
                     </div>
                 </div>
             </div>
