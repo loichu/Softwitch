@@ -1,109 +1,12 @@
-<div class="container-fluid">
-  <%= link_to 'Back', softwares_path, class: "btn btn-primary" %>
-
-  <p id="notice"><%= notice %></p>
-
-  <h1><%= @software.name %></h1>
-
-  <div class="show-header">
-
-    <div class="software-details">
-      <b>Editor : </b>
-      <%= @software.editor.name %><br>
-      <b>Short description :</b>
-      <%= @software.short_desc %>
-      <br>
-
-      <div class="btn-group isolated" role="group">
-        <%= link_to 'Edit', edit_software_path(@software), class: "btn btn-default btn-xs" %>
-        <%= link_to 'Delete',  @software,  method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger btn-xs" %>
-      </div>
-    </div>
-
-    <div class="right-column">
-      <label class="control-label">Version : </label>
-      <%= select_tag :version, options_for_select(@versions.all.map{|v|[v.name, v.id]}),
-                     {class: "form-control",
-                      id: "select-version"} %>
-      <br>
-      <%= link_to 'New version', new_software_version_path(software_id: @software.id),
-                  {:class => 'btn btn-large btn-primary isolated'} %>
-    </div>
-  </div>
-
-  <hr>
-
-  <div class="version-header">
-    <strong><%= @software.name %></strong>
-    <div id="version-name"></div>
-
-    <div class="btn-group" role="group">
-      <%= link_to 'Edit', '#',
-                  class: "btn btn-default btn-xs",
-                  id: 'edit-version' %>
-<!--
-      <%= link_to 'Delete', '#', method: :delete, confirm: 'Delete ?',
-                  class: "btn btn-danger btn-xs",
-                  id: 'destroy-version',
-                  'data-message' => 'Are you sure ?',
-                  'data-severity' => 'danger',
-                  :remote => true %>
--->
-      <%= link_to 'Delete', '#',
-                  class: "btn btn-danger btn-xs",
-                  id: 'destroy-version' %>
-
-    </div>
-  </div>
-
-  <div>
-    <!-- Nav tabs -->
-    <ul class="nav nav-tabs" role="tablist">
-      <li role="presentation"><a href="#details" aria-controls="details" aria-expanded="true" role="tab" data-toggle="tab">Details</a></li>
-      <li role="presentation"><a href="#presentation" aria-controls="presentation" role="tab" data-toggle="tab">Presentation</a></li>
-    </ul>
-
-    <!-- Tab panes -->
-    <div class="tab-content" id="version-desc">
-      <div role="tabpanel" class="tab-pane fade active" id="details">
-        <!--
-        /!\
-        All fields in this area are filled with JQuery (AJAX)
-        See assets/javascript/softwares.coffee
-        -->
-        <div class="version-details bs-callout bs-callout-info">
-
-
-
-          <dl class="dl-horizontal">
-            <dt>OS</dt>
-            <dd>
-              <div id="version-os-windows" class="os-icon"></div>
-              <div id="version-os-linux" class="os-icon"></div>
-              <div id="version-os-apple" class="os-icon"></div>
-            </dd>
-
-            <dt>Release date</dt>
-            <dd>
-              <div id="version-date"></div>
-            </dd>
-
-            <dt>Distrilog</dt>
-            <dd>
-              <div id="version-distrilog"></div>
-            </dd>
-          </dl>
-
-          <div class="link-buttons">
-            <%= link_to "Download", "#", :target => "_blank", id: "dl-link", :class => "btn btn-sm btn-primary external-link" %>
-            <%= link_to "Visit website", "#", :target => "_blank", id: "doc-link", :class => "btn btn-sm btn-primary external-link" %>
-          </div>
-        </div>
-      </div>
-
-      <div role="tabpanel" class="tab-pane fade" id="presentation">
-        <h1>Presentation</h1>
-      </div>
-    </div>
-  </div>
-</div>
+<%=
+  react_component("Software", {
+    software: @software,
+    editor: @software.editor,
+    links: {
+        back: softwares_path,
+        edit_soft: edit_software_path(@software),
+        delete_soft: software_path(@software),
+        new_software_version: new_software_version_path(software_id: @software.id)
+     }
+  })
+%>

@@ -17,4 +17,7 @@
 //= require bootstrap-sprockets
 //= require jquery-ui
 //= require select2-full
+//= require react
+//= require react_ujs
+//= require components
 //= require_tree .
