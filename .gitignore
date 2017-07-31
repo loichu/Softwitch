@@ -27,3 +27,5 @@
 *.lock
 
 vendor/bundle/*
+
+temp/*
