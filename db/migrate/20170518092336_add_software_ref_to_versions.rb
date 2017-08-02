@@ -1,5 +1,5 @@
-class AddSoftwareRefToVersions < ActiveRecord::Migration[5.1]
+class AddProgramRefToVersions < ActiveRecord::Migration[5.1]
   def change
-    add_reference :versions, :software, foreign_key: true
+    add_reference :versions, :program, foreign_key: true
   end
 end

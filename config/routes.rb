@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
   get 'welcome/index'
 
-  # This is for accessing software's versions
-  resources :softwares do
+  # This is for accessing program's versions
+  resources :programs do
     resources :versions, only: [:show, :index, :new, :create]
   end
   # This is for accessing version alone

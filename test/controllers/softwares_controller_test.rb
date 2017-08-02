@@ -1,48 +1,48 @@
 require 'test_helper'
 
-class SoftwaresControllerTest < ActionDispatch::IntegrationTest
+class ProgramsControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @software = softwares(:one)
+    @program = programs(:one)
   end
 
   test "should get index" do
-    get softwares_url
+    get programs_url
     assert_response :success
   end
 
   test "should get new" do
-    get new_software_url
+    get new_program_url
     assert_response :success
   end
 
-  test "should create software" do
-    assert_difference('Software.count') do
-      post softwares_url, params: { software: {  } }
+  test "should create program" do
+    assert_difference('Program.count') do
+      post programs_url, params: { program: {  } }
     end
 
-    assert_redirected_to software_url(Software.last)
+    assert_redirected_to program_url(Program.last)
   end
 
-  test "should show software" do
-    get software_url(@software)
+  test "should show program" do
+    get program_url(@program)
     assert_response :success
   end
 
   test "should get edit" do
-    get edit_software_url(@software)
+    get edit_program_url(@program)
     assert_response :success
   end
 
-  test "should update software" do
-    patch software_url(@software), params: { software: {  } }
-    assert_redirected_to software_url(@software)
+  test "should update program" do
+    patch program_url(@program), params: { program: {  } }
+    assert_redirected_to program_url(@program)
   end
 
-  test "should destroy software" do
-    assert_difference('Software.count', -1) do
-      delete software_url(@software)
+  test "should destroy program" do
+    assert_difference('Program.count', -1) do
+      delete program_url(@program)
     end
 
-    assert_redirected_to softwares_url
+    assert_redirected_to programs_url
   end
 end

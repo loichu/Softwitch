@@ -1,4 +1,4 @@
-class Software < ApplicationRecord
+class Program < ApplicationRecord
   belongs_to :editor
   has_many :versions, dependent: :destroy
 

@@ -1,12 +1,12 @@
-<%= form_for @software do |s| %>
-    <% if @software.errors.any? %>
+<%= form_for @program do |s| %>
+    <% if @program.errors.any? %>
         <div id="error_explanation">
           <h2>
-            <%= pluralize(@software.errors.count, "error") %> prohibited
-            this software from being saved:
+            <%= pluralize(@program.errors.count, "error") %> prohibited
+            this program from being saved:
           </h2>
           <ul>
-            <% @software.errors.full_messages.each do |msg| %>
+            <% @program.errors.full_messages.each do |msg| %>
                 <li><%= msg %></li>
             <% end %>
           </ul>
@@ -14,7 +14,7 @@
     <% end %>
 
     <fieldset class="form-group">
-      <%= s.label :name, "Software's name", class: "control-label" %><br>
+      <%= s.label :name, "Program's name", class: "control-label" %><br>
       <%= s.text_field :name, class: "form-control" %>
     </fieldset>
 
@@ -28,7 +28,7 @@
       <%= s.text_field :short_desc, class: "form-control" %>
     </fieldset>
 
-    <% if @software.new_record? %>
+    <% if @program.new_record? %>
         <%= fields_for :version, Version.new do |v| %>
             <h3>Version's details</h3>
             <hr>

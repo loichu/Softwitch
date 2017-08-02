@@ -1,4 +1,4 @@
-class Software extends React.Component{
+class Program extends React.Component{
     constructor(props) {
         super(props);
 
@@ -21,13 +21,13 @@ class Software extends React.Component{
             this.setState({activeTab: this.state.tabs[0]});
         }
     }
-    // Request all software related versions
+    // Request all program related versions
     updateVersionsAjax() {
-        let software_id = this.props.software.id;
+        let program_id = this.props.program.id;
         let self = this;
         $.ajax({
             method: "GET",
-            url: "/softwares/" + software_id + "/versions.json",
+            url: "/programs/" + program_id + "/versions.json",
             success(versions) {
                 self.setState({versions: versions});
                 self.setState({currentVersion: self.state.versions[0]});
@@ -48,10 +48,10 @@ class Software extends React.Component{
         this.setState({activeTab: tab});
     }
     render() {
-        //console.log("Render Software");
+        //console.log("Render Program");
 
         // Props
-        let software = this.props.software,
+        let program = this.props.program,
             editor = this.props.editor;
 
         // States
@@ -67,15 +67,15 @@ class Software extends React.Component{
             <div className="container-fluid">
                 <a className="btn btn-primary" href={links.back}>Back</a>
 
-                <h1>{ software.name }</h1>
+                <h1>{ program.name }</h1>
 
                 <div className="show-header">
-                    <div className="software-details">
+                    <div className="program-details">
                         <b>Editor : </b>
                         { editor.name }<br />
 
                         <b>Short description :</b>
-                        { software.short_desc }
+                        { program.short_desc }
 
                         <br />
 
@@ -113,7 +113,7 @@ class Software extends React.Component{
                         <br />
 
                         <a className="btn btn-large btn-primary isolated"
-                           href={links.new_software_version}>New version
+                           href={links.new_program_version}>New version
                         </a>
                     </div>
                 </div>
@@ -121,7 +121,7 @@ class Software extends React.Component{
                 <hr />
 
                 <div className="version-header">
-                    <strong>{ software.name }</strong>
+                    <strong>{ program.name }</strong>
                     <div id="version-name" className="col-md-1">{currentVersion.name}</div>
 
                     <div className="btn-group" role="group">

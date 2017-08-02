@@ -1,5 +1,5 @@
-class AddCompatibilityToSoftwares < ActiveRecord::Migration[5.1]
+class AddCompatibilityToPrograms < ActiveRecord::Migration[5.1]
   def change
-    add_column :softwares, :compatibility, :string
+    add_column :programs, :compatibility, :string
   end
 end

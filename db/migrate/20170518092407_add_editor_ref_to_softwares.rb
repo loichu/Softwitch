@@ -1,5 +1,5 @@
-class AddEditorRefToSoftwares < ActiveRecord::Migration[5.1]
+class AddEditorRefToPrograms < ActiveRecord::Migration[5.1]
   def change
-    add_reference :softwares, :editor, foreign_key: true
+    add_reference :programs, :editor, foreign_key: true
   end
 end

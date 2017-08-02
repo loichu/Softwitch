@@ -1,0 +1,12 @@
+<%=
+  react_component("Program", {
+    program: @program,
+    editor: @program.editor,
+    links: {
+        back: programs_path,
+        edit_soft: edit_program_path(@program),
+        delete_soft: program_path(@program),
+        new_program_version: new_program_version_path(program_id: @program.id)
+     }
+  })
+%>

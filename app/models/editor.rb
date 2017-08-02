@@ -1,3 +1,3 @@
 class Editor < ApplicationRecord
-  has_many :softwares
+  has_many :programs
 end

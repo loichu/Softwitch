@@ -1,10 +1,10 @@
 class VersionsController < ApplicationController
   before_action :set_version, only: [:show, :edit, :update, :destroy]
 
-  # GET /softwares/:software_id/versions
-  # GET /softwares/:software_id/versions.json
+  # GET /programs/:program_id/versions
+  # GET /programs/:program_id/versions.json
   def index
-    @versions = Version.where(:software_id => params[:software_id])
+    @versions = Version.where(:program_id => params[:program_id])
   end
 
   # GET /versions/1
@@ -13,9 +13,9 @@ class VersionsController < ApplicationController
     @version = Version.find(params[:id])
   end
 
-  # GET /softwares/:software_id/versions/new
+  # GET /programs/:program_id/versions/new
   def new
-    @software = Software.find params[:software_id]
+    @program = Program.find params[:program_id]
     @os = OperatingSystem.all
     @version = Version.new
   end
@@ -23,18 +23,18 @@ class VersionsController < ApplicationController
   # GET /versions/1/edit
   def edit
     @os = OperatingSystem.all
-    @software = @version.software
+    @program = @version.program
   end
 
-  # POST /softwares/:software_id/versions
-  # POST /softwares/:software_id/versions.json
+  # POST /programs/:program_id/versions
+  # POST /programs/:program_id/versions.json
   def create
-    @software = Software.find params[:software_id]
-    @version = @software.versions.create(version_params)
+    @program = Program.find params[:program_id]
+    @version = @program.versions.create(version_params)
 
     respond_to do |format|
       if @version.save
-        format.html { redirect_to @software, notice: 'Version was successfully created.' }
+        format.html { redirect_to @program, notice: 'Version was successfully created.' }
         format.json { render :show, status: :created, location: @version }
       else
         format.html { render :new }
@@ -79,9 +79,9 @@ class VersionsController < ApplicationController
   end
 
   # It's useless because of the nested routes
-  def check_software
-    if params[:software_id] == nil
-      redirect_to softwares_url, :flash => { :error => "A version must correspond to a software"}
+  def check_program
+    if params[:program_id] == nil
+      redirect_to programs_url, :flash => { :error => "A version must correspond to a program"}
     end
   end
 end
