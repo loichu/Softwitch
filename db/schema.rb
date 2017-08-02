@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170718125025) do
+ActiveRecord::Schema.define(version: 20170731144839) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -98,6 +98,7 @@ ActiveRecord::Schema.define(version: 20170718125025) do
     t.bigint "pc_id"
     t.index ["pc_id"], name: "index_secrets_on_pc_id"
   end
+
   create_table "tags", force: :cascade do |t|
     t.string "tag"
     t.string "type"
@@ -120,11 +121,11 @@ ActiveRecord::Schema.define(version: 20170718125025) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "program_id"
-    t.index ["program_id"], name: "index_versions_on_program_id"
+    t.index ["program_id"], name: "index_versions_on_software_id"
   end
 
   add_foreign_key "pcs", "rooms"
   add_foreign_key "programs", "editors"
   add_foreign_key "secrets", "pcs"
-  add_foreign_key "versions", "programs", column: "program_id"
+  add_foreign_key "versions", "programs"
 end
