@@ -2,6 +2,8 @@
   "scripts": {
     "postinstall": "cd client && yarn install",
 
+    "postinstall": "cd client && yarn install",
+
     "postinstall": "cd client && yarn install"
   },
 
