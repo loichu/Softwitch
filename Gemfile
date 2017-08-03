@@ -21,7 +21,8 @@ gem 'jquery-ui-rails'
 # Select2
 gem 'select2-rails'
 # React
-gem "react-rails"
+# gem "react-rails" Baaaad gem
+gem "react_on_rails", "8.0.0"
 #---------------
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
