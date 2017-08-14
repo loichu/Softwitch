@@ -29,3 +29,10 @@
 vendor/bundle/*
 
 temp/*
+# React on Rails
+npm-debug.log*
+node_modules
+
+# Generated js bundles
+/public/webpack/*
+/client/node_modules/
