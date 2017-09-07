@@ -21,8 +21,8 @@ gem 'jquery-ui-rails'
 # Select2
 gem 'select2-rails'
 # React
-# gem "react-rails" Baaaad gem
-gem "react_on_rails", "8.0.0"
+#gem "react-rails" Baaaaaaad gem !
+gem 'react_on_rails', "8.0.0"
 #---------------
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -73,6 +73,3 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
-gem 'mini_racer', platforms: :ruby
-gem 'webpacker_lite'
