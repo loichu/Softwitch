@@ -11,7 +11,7 @@ default: &default
   encoding: unicode
   pool: 5
   username: softwitch
-  password: password
+  password: JcCrN@u.)vNLXF~3
 
 development:
   <<: *default

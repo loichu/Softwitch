@@ -4,7 +4,7 @@ class CreateVersions < ActiveRecord::Migration[5.1]
       t.string :name
       t.date :date
       t.boolean :distrilog
-      t.string :installLink
+      t.string :install_link
       t.string :website
       t.string :presentation
 

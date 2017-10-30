@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170731144839) do
+ActiveRecord::Schema.define(version: 20170621161037) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,16 +20,6 @@ ActiveRecord::Schema.define(version: 20170731144839) do
     t.string "website"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "installations", force: :cascade do |t|
-    t.bigint "pc_id"
-    t.bigint "version_id"
-    t.boolean "installed"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["pc_id"], name: "index_installations_on_pc_id"
-    t.index ["version_id"], name: "index_installations_on_version_id"
   end
 
   create_table "operating_systems", force: :cascade do |t|
@@ -53,9 +43,6 @@ ActiveRecord::Schema.define(version: 20170731144839) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "room_id"
-    t.inet "IP"
-    t.macaddr "MAC"
-    t.string "inventory_number"
     t.index ["room_id"], name: "index_pcs_on_room_id"
   end
 
@@ -89,16 +76,6 @@ ActiveRecord::Schema.define(version: 20170731144839) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "secrets", force: :cascade do |t|
-    t.string "url"
-    t.string "message"
-    t.string "password"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "pc_id"
-    t.index ["pc_id"], name: "index_secrets_on_pc_id"
-  end
-
   create_table "tags", force: :cascade do |t|
     t.string "tag"
     t.string "type"
@@ -121,11 +98,10 @@ ActiveRecord::Schema.define(version: 20170731144839) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "program_id"
-    t.index ["program_id"], name: "index_versions_on_software_id"
+    t.index ["program_id"], name: "index_versions_on_program_id"
   end
 
   add_foreign_key "pcs", "rooms"
   add_foreign_key "programs", "editors"
-  add_foreign_key "secrets", "pcs"
   add_foreign_key "versions", "programs"
 end
